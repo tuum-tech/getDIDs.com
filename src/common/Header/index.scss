@@ -1,0 +1,39 @@
+.header-container {
+  justify-content: center;
+  padding-left: 45px;
+
+  .header-item {
+    font-size: 1.5em;
+    position: relative;
+    margin-right: 30px;
+    &:before {
+      position: absolute;
+      left: -20px;
+      top: 10px;
+      content:"\A";
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background: black;
+      display:inline-block;
+      margin:0 10px;
+    }
+  
+    &.active {
+      font-weight: bold;
+    }
+  
+    @media (max-width: 576px) {
+      font-size: 1em;
+      &:before {
+        top: 5px;
+      }
+      margin-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    justify-content: space-around;
+    padding-left: 0;
+  }
+}

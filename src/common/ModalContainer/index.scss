@@ -1,0 +1,49 @@
+.modal-container {
+  border-radius: 1.5em;
+  box-shadow: 0 2em 2.5em 0 rgba(132, 132, 132, 0.22);
+  background-color: #ffffff;
+
+  width: 36em;
+  height: 50em;
+  
+  padding: 3em;
+  
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    font-size: 2em;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  
+    margin-top: 1em;
+    margin-bottom: 2.2em;
+  }
+  
+  .description {
+    font-size: 1em;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.69;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+
+  @media (max-width: 576px) {
+    width: 90%;
+    padding: 2em 1.2em;
+    height: 90%;
+    justify-content: space-around;
+
+    .title {
+      margin: 0;
+    }
+  }
+}

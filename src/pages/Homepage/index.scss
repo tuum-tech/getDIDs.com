@@ -1,0 +1,12 @@
+.homepage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  @media screen and (max-width: 576px) {
+    padding-left: 30px;
+  }
+}
