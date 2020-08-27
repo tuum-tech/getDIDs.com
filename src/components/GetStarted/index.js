@@ -1,10 +1,23 @@
-import React from 'react'
+import React, {useEffect, useContext} from 'react'
 import propTypes from 'prop-types'
 import ModalContainer from 'common/ModalContainer'
 import NextButton from 'common/NextButton'
 import ninjiImage from 'assets/ninja.png'
+import MnemonicContext from 'context/MnemonicContext'
 
 function GetStarted({setStep}) {
+  const {setMnemonic, setPrivatekey, setPublickey, setDid} = useContext(MnemonicContext)
+
+  useEffect(() => {
+    /*eslint-disable no-undef*/
+    const mnemonicObject = createDid()
+    setMnemonic(mnemonicObject.mnemonic.split(' '))
+    setPrivatekey(mnemonicObject.privateKey)
+    setPublickey(mnemonicObject.publicKey)
+    setDid(mnemonicObject.did)
+    /*eslint-disable no-undef*/
+  }, [])
+
   return (
     <ModalContainer>
       <img src={ninjiImage} alt="ninja" className="d-flex align-self-center" />

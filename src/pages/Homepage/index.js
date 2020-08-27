@@ -1,10 +1,11 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import GetStarted from 'components/GetStarted'
 import Create from 'components/Create'
 import Publish from 'components/Publish'
 import WhatNext from 'components/WhatNext'
 import Header from 'common/Header'
 import Footer from 'common/Footer'
+import MnemonicContext from 'context/MnemonicContext'
 import './index.scss'
 
 function renderComponent(step, setStep) {
@@ -25,9 +26,21 @@ function renderComponent(step, setStep) {
 function Homepage() {
 
   const [step, setStep] = useState(0)
-
+  const [mnemonic, setMnemonic] = useState(["-","-","-","-","-","-","-","-","-","-","-","-"])
+  const [privateKey, setPrivatekey] = useState(null)
+  const [publicKey, setPublickey] = useState(null)
+  const [did, setDid] = useState(null)
   return (
-    <Fragment>
+    <MnemonicContext.Provider value={{
+      mnemonic,
+      setMnemonic: (generatedMnemonic) => setMnemonic(generatedMnemonic),
+      privateKey,
+      setPrivatekey: (generatedPrivatekey) => setPrivatekey(generatedPrivatekey),
+      publicKey,
+      setPublickey: (generatedPublickey) => setPublickey(generatedPublickey),
+      did,
+      setDid: (generatedDid) => setDid(generatedDid)
+    }}>
       <div className="header">
         <Header order={step} />
       </div>
@@ -39,7 +52,7 @@ function Homepage() {
       <div className="footer">
         <Footer />
       </div>
-    </Fragment>
+    </MnemonicContext.Provider>
   )
 }
 

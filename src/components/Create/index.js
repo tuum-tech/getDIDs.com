@@ -1,28 +1,38 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { func } from 'prop-types'
 import NextButton from 'common/NextButton'
 import ModalContainer from 'common/ModalContainer'
+import MnemonicContext from 'context/MnemonicContext'
 
 import './index.scss';
 
-function MnemonicItem({number, title, key}) {
+function MnemonicItem({number, title}) {
   return (
-    <div className="mnemonic" key={key}>
+    <div className="mnemonic">
       <span className="number">{number}</span>
       {title}
     </div>
   )
 }
 
-const mnemonicArray = ['measures', 'bread', 'rectangle', 'mountain', 'healing', 'tree', 'academy', 'purple', 'sunshine', 'twister', 'dog', 'fabrications'];
-
 function Create({setStep}) {
+  const {mnemonic, setMnemonic, setPrivatekey, setPublickey, setDid} = useContext(MnemonicContext)
+  useEffect(() => {
+    /*eslint-disable no-undef*/
+    const mnemonicObject = createDid()
+    setMnemonic(mnemonicObject.mnemonic.split(' '))
+    setPrivatekey(mnemonicObject.privateKey)
+    setPublickey(mnemonicObject.publicKey)
+    setDid(mnemonicObject.did)
+    /*eslint-disable no-undef*/
+  }, [])
+  
   return (
     <ModalContainer>
       <span className="title">Your Mnemonic</span>
       <div className="mnemonic-wrapper">
         {
-          mnemonicArray.map((item, key) => <MnemonicItem key={`mnemonic-key-${key}`} number={key + 1} title={item} />)
+          mnemonic.map((item, key) => <MnemonicItem key={`mnemonic-key-${key}`} number={key + 1} title={item} />)
         }
       </div>
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
