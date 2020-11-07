@@ -3,7 +3,7 @@ import { func } from 'prop-types'
 import NextButton from 'common/NextButton'
 import ModalContainer from 'common/ModalContainer'
 import MnemonicContext from 'context/MnemonicContext'
-
+import { ElastosClient } from "@tuum-tech/elastos-js-sdk"
 import './index.scss';
 
 function MnemonicItem({number, title}) {
@@ -18,13 +18,20 @@ function MnemonicItem({number, title}) {
 function Create({setStep}) {
   const {mnemonic, setMnemonic, setPrivatekey, setPublickey, setDid} = useContext(MnemonicContext)
   useEffect(() => {
-    /*eslint-disable no-undef*/
-    const mnemonicObject = createDid()
-    setMnemonic(mnemonicObject.mnemonic.split(' '))
-    setPrivatekey(mnemonicObject.privateKey)
-    setPublickey(mnemonicObject.publicKey)
-    setDid(mnemonicObject.did)
-    /*eslint-disable no-undef*/
+
+    async function generateDid()
+    {
+      /*eslint-disable no-undef*/
+      const mnemonicObject = await ElastosClient.did.generateNew()
+      setMnemonic(mnemonicObject.mnemonic.split(' '))
+      setPrivatekey(mnemonicObject.privateKey)
+      setPublickey(mnemonicObject.publicKey)
+      setDid(mnemonicObject.did.replace('did:elastos:', ''))
+      /*eslint-disable no-undef*/
+    }
+
+    generateDid();
+    
   }, [])
   
   return (

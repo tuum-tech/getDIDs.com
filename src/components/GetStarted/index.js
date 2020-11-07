@@ -8,14 +8,8 @@ import MnemonicContext from 'context/MnemonicContext'
 function GetStarted({setStep}) {
   const {setMnemonic, setPrivatekey, setPublickey, setDid} = useContext(MnemonicContext)
 
-  useEffect(() => {
-    /*eslint-disable no-undef*/
-    const mnemonicObject = createDid()
-    setMnemonic(mnemonicObject.mnemonic.split(' '))
-    setPrivatekey(mnemonicObject.privateKey)
-    setPublickey(mnemonicObject.publicKey)
-    setDid(mnemonicObject.did)
-    /*eslint-disable no-undef*/
+  useEffect( () => {
+ 
   }, [])
 
   return (

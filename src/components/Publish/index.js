@@ -1,3 +1,4 @@
+
 import React, { Fragment, useContext } from "react";
 import { func } from "prop-types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -8,13 +9,49 @@ import ModalContainer from "common/ModalContainer";
 import NextButton from "common/NextButton";
 import MnemonicContext from "context/MnemonicContext";
 import { ToastContainer, toast, Slide } from "react-toastify";
-
+import { ElastosClient } from "@tuum-tech/elastos-js-sdk"
 import "react-toastify/dist/ReactToastify.css";
 
 var QRCode = require("qrcode.react");
 
+
 function Publish({ setStep }) {
-  const { did } = useContext(MnemonicContext);
+  const {did, privateKey, publicKey, mnemonic} = useContext(MnemonicContext)  
+  const publishDocument = async () =>{
+
+    
+    
+    let didelement = await ElastosClient.did.loadFromMnemonic(mnemonic.join(' '))
+    let diddocument = ElastosClient.didDocuments.newDIDDocument(didelement)
+    let signedDocument = ElastosClient.didDocuments.sealDocument(didelement, diddocument)
+
+
+    let tx = ElastosClient.idChainRequest.generateCreateRequest(signedDocument, didelement)
+
+    console.log("is tx valid", ElastosClient.idChainRequest.isValid(tx, didelement))
+
+    let url = "http://192.168.86.27:8000/v1/didtx/create"
+    let data = {
+      "didRequest" : tx,
+      "requestFrom": "GetDIDs.com",
+      "did": `did:elastos:${did}`,
+      "memo": ""
+    }
+
+    console.log("Publish request", data)
+
+
+    let response = await fetch(url, {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "assist-restapi-secret-key"
+         },
+         body: JSON.stringify(data)
+    });
+
+    setStep()
+  }
 
   const notify = () =>
     toast.success("DID successfully copied to clipboard", {
@@ -42,7 +79,7 @@ function Publish({ setStep }) {
         <div className="text-center">
           <span className="description d-block mb-2">{`did:elastos:${did}`}</span>
           <CopyToClipboard
-            text="did:elastos:iouMSXKHNcwdbPzb58pXpmGBxrMzfq2c"
+            text={`did:elastos:${did}`}
             onCopy={notify}
           >
             <span className="cursor-pointer ml-2 font-weight-bold">
@@ -50,7 +87,7 @@ function Publish({ setStep }) {
             </span>
           </CopyToClipboard>
         </div>
-        <NextButton title="Let's Publish" onClick={setStep} />
+        <NextButton title="Let's Publish" onClick={publishDocument} />
       </div>
     </ModalContainer>
   );
