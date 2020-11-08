@@ -16,15 +16,52 @@ var QRCode = require("qrcode.react");
 
 
 function Publish({ setStep }) {
-  const {did, privateKey, publicKey, mnemonic} = useContext(MnemonicContext)  
+  const {did, twitter_name, twitter_user, mnemonic} = useContext(MnemonicContext)  
   const publishDocument = async () =>{
-
-    
-    
     let didelement = await ElastosClient.did.loadFromMnemonic(mnemonic.join(' '))
     let diddocument = ElastosClient.didDocuments.newDIDDocument(didelement)
+
+    if (twitter_name)
+    {
+      console.log("using twitter name", twitter_name)
+
+      let vcName = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "Name", ["ProfileCredential"], twitter_name)
+      ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcName)
+
+      
+    }
+
+    if (twitter_user)
+    {
+      console.log("using twitter user", twitter_user)
+      let url = "http://192.168.86.27:8081/v1/validation/twitter_handle"
+      let response = await fetch(url, {
+           method: 'POST',
+           headers: {
+              'Content-Type': 'application/json',
+              "Authorization": "didcreds-validator-secret-key"
+           },
+           body: JSON.stringify({
+             did: didelement.did,
+             value: twitter_user
+           })
+      });
+  
+      if (response.ok) {
+        let json = await response.json();
+        console.log("Request json", json.data)
+
+        let vc = json.data.verifiable_credential
+        
+        ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vc)
+      } 
+    }
+
+    console.log(JSON.stringify(diddocument, null, ""))
+
     let signedDocument = ElastosClient.didDocuments.sealDocument(didelement, diddocument)
 
+    console.log("is document valid", ElastosClient.didDocuments.isValid(diddocument, didelement))
 
     let tx = ElastosClient.idChainRequest.generateCreateRequest(signedDocument, didelement)
 

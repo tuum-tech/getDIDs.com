@@ -10,7 +10,7 @@ import MnemonicContext from "context/MnemonicContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {useLocation} from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { useHistory } from "react-router-dom";
 import "./index.scss";
 
 function renderComponent(step, setStep) {
@@ -31,18 +31,13 @@ function renderComponent(step, setStep) {
 }
 
   function Homepage() {
-  
+  const history = useHistory();
   const search = useLocation().search;
   const oauth_token = new URLSearchParams(search).get('oauth_token');
   const oauth_verifier = new URLSearchParams(search).get('oauth_verifier');
-
-  const [cookies, setCookie] = useCookies(["twitter"]);
-
-  function handleCookie() {
-    
-  }
-
-  const [step, setStep] = useState(0);
+  const [twitter_user, setTwitterUser] = useState(null);
+  const [twitter_name, setTwitterName] = useState(null);
+  
   const [mnemonic, setMnemonic] = useState([
     "-",
     "-",
@@ -61,10 +56,12 @@ function renderComponent(step, setStep) {
   const [publicKey, setPublickey] = useState(null);
   const [did, setDid] = useState(null);
 
+  let startStep = 0
 
   if (oauth_token)
   {
-    let response = fetch("http://192.168.86.27:8081/v1/auth/twitter_callback", {
+    //startStep  =1
+    let responseFetch = fetch("http://192.168.86.27:8081/v1/auth/twitter_callback", {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json',
@@ -75,16 +72,19 @@ function renderComponent(step, setStep) {
         verifier: oauth_verifier
       })
     }).then(s=>{
-      console.log(s)
       return s.json()
-      //window.close()
     })
-    .then(data => {
-      console.log(data.data.response)
-      localStorage.setItem("twitter", data.data.response)
-     // window.close()
+    .then(json => {
+        let response = atob(json.data.response).split(";")
+        setTwitterName(response[0])
+        setTwitterUser(response[1])
+        history.push("/?logged");
     });
+  } else {
+    
   }
+
+  const [step, setStep] = useState(startStep);
 
   return (
     <MnemonicContext.Provider
@@ -98,6 +98,8 @@ function renderComponent(step, setStep) {
         setPublickey: (generatedPublickey) => setPublickey(generatedPublickey),
         did,
         setDid: (generatedDid) => setDid(generatedDid),
+        twitter_name,
+        twitter_user,
       }}
     >
       <ToastContainer />
@@ -105,11 +107,7 @@ function renderComponent(step, setStep) {
         <Header order={step} />
       </div>
       <div className="d-flex w-100 main-container">
-       
         <div className="homepage">{renderComponent(step, setStep)}</div>
-        <div>
-          test {process.env.REACT_APP_TEST} este
-        </div>
       </div>
       <div className="footer">
         <Footer />
