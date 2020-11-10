@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from 'pages/Homepage';
 import * as serviceWorker from './serviceWorker';
 import { CookiesProvider } from "react-cookie";
-import {BrowserRouter, Router, Route} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 
 import './index.scss'
 

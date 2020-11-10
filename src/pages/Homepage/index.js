@@ -7,11 +7,12 @@ import WhatNext from "components/WhatNext";
 import Header from "common/Header";
 import Footer from "common/Footer";
 import MnemonicContext from "context/MnemonicContext";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {useLocation} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import "./index.scss";
+import backImage from 'assets/mainbackground.png'
 
 function renderComponent(step, setStep) {
   switch (step) {
@@ -37,6 +38,7 @@ function renderComponent(step, setStep) {
   const oauth_verifier = new URLSearchParams(search).get('oauth_verifier');
   const [twitter_user, setTwitterUser] = useState(null);
   const [twitter_name, setTwitterName] = useState(null);
+  const [isLogged, setIsLogged] = useState(false);
   
   const [mnemonic, setMnemonic] = useState([
     "-",
@@ -52,16 +54,14 @@ function renderComponent(step, setStep) {
     "-",
     "-",
   ]);
-  const [privateKey, setPrivatekey] = useState(null);
-  const [publicKey, setPublickey] = useState(null);
   const [did, setDid] = useState(null);
 
   let startStep = 0
-
-  if (oauth_token)
+  if (oauth_token && !isLogged)
   {
-    //startStep  =1
-    let responseFetch = fetch("http://192.168.86.27:8081/v1/auth/twitter_callback", {
+    startStep = 1
+    setIsLogged(true)
+    fetch("http://192.168.86.27:8081/v1/auth/twitter_callback", {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json',
@@ -78,11 +78,10 @@ function renderComponent(step, setStep) {
         let response = atob(json.data.response).split(";")
         setTwitterName(response[0])
         setTwitterUser(response[1])
-        history.push("/?logged");
+        setStep(1)
+        history.push("/");
     });
-  } else {
-    
-  }
+  } 
 
   const [step, setStep] = useState(startStep);
 
@@ -91,18 +90,16 @@ function renderComponent(step, setStep) {
       value={{
         mnemonic,
         setMnemonic: (generatedMnemonic) => setMnemonic(generatedMnemonic),
-        privateKey,
-        setPrivatekey: (generatedPrivatekey) =>
-          setPrivatekey(generatedPrivatekey),
-        publicKey,
-        setPublickey: (generatedPublickey) => setPublickey(generatedPublickey),
         did,
         setDid: (generatedDid) => setDid(generatedDid),
+        isLogged,
         twitter_name,
         twitter_user,
       }}
     >
       <ToastContainer />
+      
+      
       <div className="header">
         <Header order={step} />
       </div>
