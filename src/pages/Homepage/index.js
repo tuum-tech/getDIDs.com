@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GetStarted from "components/GetStarted";
 import Create from "components/Create";
+import VerifyMnemonics from "components/VerifyMnemonics";
 import Import from "components/Import";
 import Publish from "components/Publish";
 import WhatNext from "components/WhatNext";
@@ -12,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 import {useLocation} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import "./index.scss";
-import backImage from 'assets/mainbackground.png'
 
 function renderComponent(step, setStep) {
   switch (step) {
@@ -23,11 +23,13 @@ function renderComponent(step, setStep) {
     case 2:
       return <Create setStep={() => setStep(3)} />;
     case 3:
-      return <Publish setStep={() => setStep(4)} />;
+      return <VerifyMnemonics setStep={() => setStep(4)} />;
     case 4:
+      return <Publish setStep={() => setStep(5)} />;
+    case 5:
       return <WhatNext setStep={setStep} />;
     default:
-      return <Create setStep={() => setStep(1)} />;
+      return <GetStarted setStep={() => setStep(1)} />;
   }
 }
 

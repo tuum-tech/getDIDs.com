@@ -34,13 +34,13 @@ function Create({setStep}) {
   
   return (
     <ModalContainer>
-      
+      <span className="title">Your security words</span>
       <div className="mnemonic-wrapper">
         {
           mnemonic.map((item, key) => <MnemonicItem key={`mnemonic-key-${key}`} number={key + 1} title={item} />)
         }
       </div>
-      <span className="title">Your Mnemonic</span>
+      
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
         <span className="description">These are your security words (like a password).</span>
         <div>

@@ -1,7 +1,7 @@
 .next-step {
   display: flex;
   justify-content: space-between;
-  border: solid 1px #c9c9c9;
+  border: solid 1px #000000;
   border-radius: 19px;
   height: 70px;
   padding: 10px 20px;
@@ -9,5 +9,24 @@
   font-weight: bold;
   background-color: white;
   width: 100%;
+  cursor: pointer;
 
+}
+
+.info-footer{
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: 0.35px;
+  text-align: center;
+}
+
+.content{
+  padding-left: 100px;
+  padding-right: 100px; 
+  align-items: center;
+  height: 80%;
 }

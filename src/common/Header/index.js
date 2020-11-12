@@ -15,8 +15,8 @@ function Header({order}) {
       <HeaderItem active={order>=0} title="Get Started" />
       <HeaderItem active={order>=1} title="Import" />
       <HeaderItem active={order>=2} title="Create" />
-      <HeaderItem active={order>=3} title="Publish" />
-      <HeaderItem active={order>=4} title="What Next?" />
+      <HeaderItem active={order>=4} title="Publish" />
+      <HeaderItem active={order>=5} title="What Next?" />
     </div>
   )
 }

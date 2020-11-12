@@ -2,16 +2,14 @@
 import React, { useContext } from "react";
 import { func } from "prop-types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy as farCopy } from "@fortawesome/free-regular-svg-icons";
-
+import copyimg from "assets/copy.svg"
 import ModalContainer from "common/ModalContainer";
 import NextButton from "common/NextButton";
 import MnemonicContext from "context/MnemonicContext";
 import { toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GetDids from "services/getdids.service"
-
+import './index.scss';
 var QRCode = require("qrcode.react");
 
 
@@ -19,10 +17,10 @@ function Publish({ setStep }) {
   const {did, twitter_name, twitter_user, mnemonic} = useContext(MnemonicContext)  
 
   const publishDocument = async () =>{
-    await GetDids.PublishDocument(mnemonic, {
-      name: twitter_name,
-      user: twitter_user
-    })
+    // await GetDids.PublishDocument(mnemonic, {
+    //   name: twitter_name,
+    //   user: twitter_user
+    // })
 
     setStep()
   }
@@ -41,27 +39,28 @@ function Publish({ setStep }) {
     });
   return (
     <ModalContainer>
-      <span className="title mt-4">You own an Identity!</span>
+      <span className="title mt-4">You own Identity</span>
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
-        <span className="description pl-3 pr-3">
-          That long number is your Identity address and the QR code belongs to
-          that address. Congrats, it’s as simple as that!
-        </span>
+       
         <QRCode
           imageSettings={{ width: "153px", height: "153px" }} 
           value={`did:elastos:${did}`}         
         />
         <div className="text-center">
-          <span className="description d-block mb-2">{`did:elastos:${did}`}</span>
+          <span className="description d-block mb-3">{`did:elastos:${did}`}</span>
           <CopyToClipboard
             text={`did:elastos:${did}`}
             onCopy={notify}
           >
-            <span className="cursor-pointer ml-2 font-weight-bold">
-              <FontAwesomeIcon icon={farCopy} />&nbsp;Copy
+            <span className="copy-text">
+              <img src={copyimg} alt="copy"/>&nbsp;Copy
             </span>
           </CopyToClipboard>
         </div>
+        <span className="description text-padding">
+          That long number is your Identity address and the QR code belongs to
+          that address. Congrats, it’s as simple as that!
+        </span>
         <NextButton title="Let's Publish" onClick={publishDocument} />
       </div>
     </ModalContainer>

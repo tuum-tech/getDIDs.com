@@ -7,6 +7,7 @@ import MnemonicContext from "context/MnemonicContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter as farTwitter } from "@fortawesome/free-brands-svg-icons";
 import GetDids from "services/getdids.service"
+import signin from 'assets/signin.svg'
 import "react-toastify/dist/ReactToastify.css";
 import './index.scss';
 
@@ -46,13 +47,20 @@ function Import({ setStep }) {
   }  
   return (
     <ModalContainer>
-      <span className="title mt-4">Import your data using </span>
+      <span className="title mt-4">Sign in with...</span>
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
 
+      <img src={signin} alt="signin" className="d-flex align-self-center mt-3" />
+
         <TwitterInfo />
-      
-        <NextButton title="Next Step" onClick={NextStep} />
+
+        <span className="description">You don’t need to use your Twitter account to 
+create an Identity. Just press continue below to
+carry on without linking your Twitter.</span>
+
+<NextButton title="Next Step" onClick={NextStep} />
       </div>
+      
     </ModalContainer>
   );
 }

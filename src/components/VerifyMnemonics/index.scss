@@ -1,0 +1,99 @@
+.mnemonic-test-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2em;
+  margin-bottom: 1em;
+  padding-left: 75px;
+  padding-right: 75px;
+  
+    .mnemonic {
+      position: relative;
+      height: 41px;
+      border-radius: 5px;
+      border: solid 1px #bfc4ce;
+      border-left: none;
+      
+      text-align: center;
+      padding-top: 6px;
+      font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    text-align: center;
+    color: #363291;
+      min-width: 150px;
+  
+      .number {
+        position: absolute;
+        left: -16px;
+        top: 7px;
+        width: 28px;
+        height: 28px;
+        background-color: #ffffff;
+        color: #363291;
+        border-radius: 50%;
+        border: 1px solid #bfc4ce;
+        text-align: center;
+        line-height: 25px;
+        font-size: 12px;
+      }
+    }
+
+    .mnemonic-active {
+      @extend .mnemonic;  
+      background-color: #343292;
+      color: #ffffff;
+      .number {
+        background-color: #343292;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .words-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 2em;
+    margin-bottom: 4em;
+    
+    
+  
+    .mnemonic {
+      position: relative;
+      height: 32px;
+      margin-bottom: -6px;
+      border-radius: 5px;
+      border: solid 1px #bfc4ce;
+      color: #363291;
+      text-align: center;
+      line-height: 32px;
+      font-weight: bold;
+      font-size: 1em;
+      
+      min-width: 100px;
+      cursor: pointer;
+    }
+
+    .mnemonic:hover {
+        background-color: #363291;
+        color: #ffffff;
+        
+      }
+  }
+
+  .mnemonic-active{
+    color: #ffffff !important;
+    background-color: #343292 !important;
+  }
+
+  .hide { display:none; }
+  .test{
+    font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-align: center;
+  color: #595f6f;
+  }

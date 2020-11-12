@@ -11,26 +11,26 @@
 
   .title {
     font-family: 'Open Sans';
-    font-size: 44px;
+    font-size: 38px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1;
-    letter-spacing: normal;
+    line-height: 1.16;
+    letter-spacing: -0.79px;
     text-align: center;
-    color: #000000;
+    color: #0f358e;
   }
   
   .description {
     font-family: 'Open Sans';
-    font-size: 20px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.35;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000000;
+    font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-align: center;
+  color: #595f6f;
   }
 
   @media (max-width: 576px) {

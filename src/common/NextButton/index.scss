@@ -1,7 +1,7 @@
 .next-button {
   width: 335.9px;
   height: 54px;
-  border-radius: 25px;
+  border-radius: 8px;
   box-shadow: 0 20px 25px 0 rgba(52, 50, 146, 0.14);
   background-color: #333192;
   display: flex;
@@ -13,6 +13,19 @@
   cursor: pointer;
   background-color: #335892;
 }
+
+.disabled{
+  background-color: #dddddd;
+  color: #ffffff;
+  cursor: default !important;
+}
+
+.disabled:hover{
+  background-color: #dddddd !important;
+  color: #ffffff !important;
+}
+
+
 
 
 

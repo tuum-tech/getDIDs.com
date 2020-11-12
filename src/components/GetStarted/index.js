@@ -7,11 +7,18 @@ import './index.scss';
 function GetStarted({setStep}) {
   return (
     <ModalContainer>
-      <img src={getstart} alt="getstart" className="d-flex align-self-center mt-3" />
-      <span className="title mt-3">Digital Identity</span>
+      
+      <span className="title mt-3">Digital Identity (DID)</span>
       <div className="d-flex flex-column justify-content-between align-items-center h-100 content">
-        <span className="description">Let’s set you up with a Digital Identity. We call this a Decentralized Identifier (DID).</span>
-        <span className="description">It provides independent proof of ownership of your data so you can truly own it!</span>
+        <span className="description">Our lives are now linked to the apps, devices, and services 
+that we use every day. But, with each new digital connection 
+we expose our identity, and data, to new risks beyond our control.</span>
+        <img src={getstart} alt="getstart" className="d-flex align-self-center mt-3" />
+        <span className="description">Let’s set you up with a Digital Identity.
+We call this a Decentralized Identifier (DID).<br />
+It provides independent proof of ownership
+of your data so you can truly own it!
+</span>
         <NextButton title="Let's get started" onClick={setStep} />
       </div>
     </ModalContainer>

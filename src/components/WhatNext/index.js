@@ -1,58 +1,41 @@
 import React from "react";
 import ModalContainer from "common/ModalContainer";
-// import ninjiImage from "assets/ninja-what-next.png";
-// import arrow from "assets/arrow-right.svg";
-// import elastOSLogo from "assets/main-logo.svg";
-// import verifyLogo from "assets/verify-img.svg";
-//import Lottie from "react-lottie";
-// import fancyNinja from "assets/data.json";
+import elastoslogo from 'assets/mainlogo.svg'
+import arrow from 'assets/arrow-right.svg'
 
 import "./index.scss";
 
-function NextStep({ logo, title }) {
+function NextStep({ logo, title, clickFunc }) {
   return (
-    <div className="next-step mb-1">
-      {/* <img src={logo} alt="logo" height="40px" /> */}
+    <div className="next-step mb-1" onClick={clickFunc}>
+      <img src={logo} alt="logo" height="40px" />
       <span>{title}</span>
-      {/* <img src={arrow} width="16px" alt="arrow" /> */}
+      <img src={arrow} width="16px" alt="arrow" />
     </div>
   );
 }
 
 function WhatNext() {
-  // const defaultOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: fancyNinja,
-  //   rendererSettings: {
-  //     preserveAspectRatio: "xMidYMid slice",
-  //   },
-  // };
-
-  // const lottieStyle = {
-  //   position: "absolute",
-  //   margin: "10px auto",
-  //   zindex: "100",
-  // };
+  const openElastos = () =>{
+    window.location.href = `https://scheme.elastos.org/app?id=org.elastos.trinity.dapp.did`
+  }
   return (
     <ModalContainer>
-      {/* <Lottie
-        options={defaultOptions}
-        height={360}
-        width={300}
-        isStopped={false}
-        isPaused={false}
-        style={lottieStyle}
-      /> */}
-      {/* <img src={ninjiImage} alt="ninja" className="d-flex align-self-center" /> */}
-      <span className="title">Hurray!</span>
-      <span className="description">
-        Your Identity has been published and made public for all to see. You own
-        it, It’s yours!
-      </span>
-      <span className="title font-weight-normal">What next?</span>
-      {/* <NextStep logo={elastOSLogo} title="See your Identity on elastOS" />
-      <NextStep logo={verifyLogo} title="Verify DID with Vouch" /> */}
+      <span className="title mt-5">The Next Steps?</span>
+      <div className="d-flex flex-column justify-content-between align-items-center h-100">
+        <div className="d-flex flex-column justify-content-between align-items-center content">
+          <span className="description">
+            Your Identity has been published and made public for all to see. You own it, It’s yours!
+          </span>
+          <span className="description ">
+            This is just the beginning. We would suggest to download elastOS so you can view your Identity and start adding information.
+          </span>
+
+          <NextStep logo={elastoslogo} title="Manage your Identity on elastOS" clickFunc={openElastos} />
+        </div>
+      </div>
+
+      <span className="info-footer mt-3">You can safely close this window now</span>
     </ModalContainer>
   );
 }
