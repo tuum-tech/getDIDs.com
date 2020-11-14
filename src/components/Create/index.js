@@ -42,13 +42,14 @@ function Create({setStep}) {
       </div>
       
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
-        <span className="description">These are your security words (like a password).</span>
-        <div>
-          <span className="description d-block">Lose these words and you will lose the identity.</span>
-          <span className="description d-block">Keep them written down, in order, and safe. </span>
-          <span className="description d-block">Write them down now, in order!</span>
+        <span className="description">These 12 words are what give you, and you alone, access to your DID.  They act as your secure password.</span>
+        <div className="mnemonic-security-info">
+          
+          <span className="description d-block">Never share this password or store it digitally.</span>
+          <span className="description d-block">Instead, write it down and keep it safe. </span>
+          <span className="description d-block">If you lose this password, you lose access to your DID.</span>
         </div>
-        <NextButton title="Continue" onClick={setStep} />
+        <NextButton title="Next" onClick={setStep} />
       </div>
     </ModalContainer>
   )

@@ -6,28 +6,37 @@ import copyimg from "assets/copy.svg"
 import ModalContainer from "common/ModalContainer";
 import NextButton from "common/NextButton";
 import MnemonicContext from "context/MnemonicContext";
+import ConfirmationDetail from "common/ConfirmationDetail"
+import usericon from 'assets/users.svg'
+import emailicon from 'assets/email.svg'
+import birthicon from 'assets/birthicon.svg'
+import twittericon from 'assets/twittericon.svg'
 import { toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GetDids from "services/getdids.service"
 import './index.scss';
+
 var QRCode = require("qrcode.react");
 
 
 function Publish({ setStep }) {
-  const {did, twitter_name, twitter_user, mnemonic} = useContext(MnemonicContext)  
+  const { did, name, email, birthDate, twitter_user, setConfirmationID, mnemonic } = useContext(MnemonicContext)
 
-  const publishDocument = async () =>{
-    // await GetDids.PublishDocument(mnemonic, {
-    //   name: twitter_name,
-    //   user: twitter_user
-    // })
+  const publishDocument = async () => {
+    let confirmation = await GetDids.PublishDocument(mnemonic, {
+      name: name,
+      email: email,
+      birthDate: birthDate,
+      twitter: twitter_user
+    })
 
+    setConfirmationID(confirmation)
     setStep()
   }
 
   const notify = () =>
     toast.info("☑ DID successfully copied to clipboard", {
-      className:"bg-blue-600",
+      className: "bg-blue-600",
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: true,
@@ -39,29 +48,38 @@ function Publish({ setStep }) {
     });
   return (
     <ModalContainer>
-      <span className="title mt-4">You own Identity</span>
-      <div className="d-flex flex-column justify-content-between align-items-center h-100">
-       
-        <QRCode
-          imageSettings={{ width: "153px", height: "153px" }} 
-          value={`did:elastos:${did}`}         
-        />
-        <div className="text-center">
-          <span className="description d-block mb-3">{`did:elastos:${did}`}</span>
-          <CopyToClipboard
-            text={`did:elastos:${did}`}
-            onCopy={notify}
-          >
-            <span className="copy-text">
-              <img src={copyimg} alt="copy"/>&nbsp;Copy
-            </span>
-          </CopyToClipboard>
-        </div>
-        <span className="description text-padding">
-          That long number is your Identity address and the QR code belongs to
-          that address. Congrats, it’s as simple as that!
+      <span className="title">Congrats!</span>
+      <span className="description">
+          Your identity is now created. Let's publish, and then you're all set!
         </span>
-        <NextButton title="Let's Publish" onClick={publishDocument} />
+      <div className="d-flex flex-column justify-content-between align-items-center h-100 mt=4">
+       
+
+        <div className="publish-details" >
+          <div className="qrcode-did">
+            <QRCode
+              imageSettings={{ width: "120px", height: "120px" }}
+              value={`did:elastos:${did}`}
+            />
+            <div className="text-center mt-1">
+              <span className="did-text">{`did:elastos:${did}`}</span>
+              
+              <CopyToClipboard
+                text={`did:elastos:${did}`}
+                onCopy={notify}
+              >
+                <span className="copy-text d-block">Click to copy address</span>
+              </CopyToClipboard>
+            </div>
+          </div>
+
+          <ConfirmationDetail icon={twittericon} value={twitter_user ? "@" + twitter_user : ""} />
+          <ConfirmationDetail icon={usericon} value={name} />
+          <ConfirmationDetail icon={emailicon} value={email} />
+          <ConfirmationDetail icon={birthicon} value={birthDate} />
+        </div>
+
+        <NextButton title="Finish" onClick={publishDocument} />
       </div>
     </ModalContainer>
   );

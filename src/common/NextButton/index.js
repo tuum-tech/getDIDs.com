@@ -8,7 +8,7 @@ import "./index.scss";
 function NextButton({ title, onClick, enabled = true }) {
    return (
     <div className={`next-button d-flex flex-column align-items-center ${enabled? "" : "disabled"}`} onClick={() =>{ if (enabled) onClick() } }>
-      <span className="button-name mt-2">{title}</span>
+      <span className="button-name">{title}</span>
     </div>
   );
 }

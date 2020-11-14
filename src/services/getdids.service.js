@@ -24,19 +24,50 @@ const GetDids = {
     return ""
     
   },
-  PublishDocument: async (mnemonic, twitter) => {
+  CallbackTwitter: async (oauth_token, oauth_verifier) =>{
+    
+    let response = await fetch("http://192.168.86.27:8081/v1/auth/twitter_callback", {
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json',
+         "Authorization": process.env.REACT_APP_DIDCRED_KEY
+      },
+      body: JSON.stringify({
+        token: oauth_token,
+        verifier: oauth_verifier
+      })
+    });
+
+    if (response.ok){
+      return await response.json()
+    }
+
+    return null;
+  },
+  PublishDocument: async (mnemonic, profile) => {
     let didelement = await ElastosClient.did.loadFromMnemonic(mnemonic.join(' '))
     let diddocument = ElastosClient.didDocuments.newDIDDocument(didelement)
 
-    if (twitter.name)
+    if (profile.name && profile.name !== "")
     {
-      let vcName = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "Name", ["ProfileCredential"], twitter.name)
+      let vcName = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "Name", ["ProfileCredential"], profile.name)
       ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcName)
     }
 
-    if (twitter.user)
+    if (profile.email && profile.email !== "")
     {
-      console.log("using twitter user", twitter.user)
+      let vcEmail = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "Email", ["EmailCredential"], profile.email)
+      ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcEmail)
+    }
+
+    if (profile.birthDate && profile.birthDate !== "")
+    {
+      let vcBirthDate = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "BirthDate", ["ProfileCredential"], profile.birthDate)
+      ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcBirthDate)
+    }
+
+    if (profile.twitter)
+    {
       let url = `${process.env.REACT_APP_DIDCRED_URL}/v1/validation/twitter_handle`
       let response = await fetch(url, {
            method: 'POST',
@@ -46,7 +77,7 @@ const GetDids = {
            },
            body: JSON.stringify({
              did: didelement.did,
-             value: twitter.user
+             value: profile.twitter
            })
       });
   
@@ -70,7 +101,7 @@ const GetDids = {
       "memo": ""
     }
 
-    await fetch(url, {
+    let response = await fetch(url, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
@@ -78,6 +109,12 @@ const GetDids = {
          },
          body: JSON.stringify(data)
     });
+
+    let json = await response.json()
+
+    console.log(json)
+
+    return json.data.confirmation_id
 
     
   }

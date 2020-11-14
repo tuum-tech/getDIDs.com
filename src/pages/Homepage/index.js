@@ -13,20 +13,23 @@ import "react-toastify/dist/ReactToastify.css";
 import {useLocation} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import "./index.scss";
-
+import ConfirmData from "components/ConfirmData";
+import getDids from "services/getdids.service";
 function renderComponent(step, setStep) {
   switch (step) {
     case 0:
       return <GetStarted setStep={() => setStep(1)} />;
     case 1:
-      return <Import setStep={() => setStep(2)} />;
+      return <Import setStep={() => setStep(2)} setMnemonic={() => setStep(3)} />;
     case 2:
-      return <Create setStep={() => setStep(3)} />;
+        return <ConfirmData setStep={() => setStep(3)} setBack={() => setStep(1)} />;
     case 3:
-      return <VerifyMnemonics setStep={() => setStep(4)} />;
+      return <Create setStep={() => setStep(4)} />;
     case 4:
-      return <Publish setStep={() => setStep(5)} />;
+      return <VerifyMnemonics setStep={() => setStep(5)} />;
     case 5:
+      return <Publish setStep={() => setStep(6)} />;
+    case 6:
       return <WhatNext setStep={setStep} />;
     default:
       return <GetStarted setStep={() => setStep(1)} />;
@@ -40,6 +43,11 @@ function renderComponent(step, setStep) {
   const oauth_verifier = new URLSearchParams(search).get('oauth_verifier');
   const [twitter_user, setTwitterUser] = useState(null);
   const [twitter_name, setTwitterName] = useState(null);
+  const [confirmationID, setConfirmationID] = useState(null);
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [birthDate, setBirthDate] = useState(null);
+
   const [isLogged, setIsLogged] = useState(false);
   
   const [mnemonic, setMnemonic] = useState([
@@ -63,26 +71,28 @@ function renderComponent(step, setStep) {
   {
     startStep = 1
     setIsLogged(true)
-    fetch("http://192.168.86.27:8081/v1/auth/twitter_callback", {
-      method: 'POST',
-      headers: {
-         'Content-Type': 'application/json',
-         "Authorization": "didcreds-validator-secret-key"
-      },
-      body: JSON.stringify({
-        token: oauth_token,
-        verifier: oauth_verifier
-      })
-    }).then(s=>{
-      return s.json()
-    })
-    .then(json => {
+    
+    getDids.CallbackTwitter(oauth_token, oauth_verifier).then(json =>{
+      if (!json || json === null)
+      {
+        setIsLogged(false)
+        setTwitterName(null)
+        setTwitterUser(null)
+        if (name) setName(null)
+  
+      } else {
         let response = atob(json.data.response).split(";")
         setTwitterName(response[0])
+    
+        if (!name || name ==="") setName(response[0])
+    
         setTwitterUser(response[1])
-        setStep(1)
-        history.push("/");
+      }
+      setStep(1)
+      history.push("/");
     });
+
+    
   } 
 
   const [step, setStep] = useState(startStep);
@@ -97,6 +107,14 @@ function renderComponent(step, setStep) {
         isLogged,
         twitter_name,
         twitter_user,
+        name,
+        email,
+        birthDate,
+        setName,
+        setBirthDate,
+        setEmail,
+        setConfirmationID,
+        confirmationID,
       }}
     >
       <ToastContainer />

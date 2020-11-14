@@ -1,3 +1,5 @@
+
+
 .title {
   margin-bottom: 1.2em !important;
   @media screen and (max-width: 576px) {
@@ -21,13 +23,16 @@
     border-left: none;
 
     text-align: center;
-    padding-top: 6px;
+    padding-top: 9px;
 
-    font-size: 16px;
-    font-weight: 600;
-    font-style: normal;
-    text-align: center;
-    color: #363291;
+    font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.58;
+  letter-spacing: normal;
+  text-align: center;
+  color: #0f358e;
 
     .number {
       position: absolute;
@@ -36,12 +41,31 @@
       width: 28px;
       height: 28px;
       background-color: #ffffff;
-      color: #343292;
+      color: #0f358e;
       border-radius: 50%;
       border: 1px solid #bfc4ce;
       text-align: center;
       line-height: 25px;
       font-size: 12px;
     }
+  }
+}
+
+.mnemonic-security-info{
+  width: 421px;
+  height: 112px;
+  border-radius: 20px;
+  background-color: #f7dbd1;
+  padding-top: 23px;
+
+  .description{
+    font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
   }
 }

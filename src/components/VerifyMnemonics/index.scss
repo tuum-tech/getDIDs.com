@@ -1,10 +1,9 @@
 .mnemonic-test-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2em;
-  margin-bottom: 1em;
-  padding-left: 75px;
-  padding-right: 75px;
+  grid-gap: 1em 2em;
+  padding-left: 120px;
+  padding-right: 120px;
   
     .mnemonic {
       position: relative;
@@ -14,13 +13,16 @@
       border-left: none;
       
       text-align: center;
-      padding-top: 6px;
-      font-size: 16px;
-    font-weight: 600;
-    font-style: normal;
-    text-align: center;
-    color: #363291;
-      min-width: 150px;
+      padding-top: 9px;
+      font-size: 12px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.58;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+      min-width: 106px;
   
       .number {
         position: absolute;
@@ -29,7 +31,7 @@
         width: 28px;
         height: 28px;
         background-color: #ffffff;
-        color: #363291;
+        color: #0f358e;
         border-radius: 50%;
         border: 1px solid #bfc4ce;
         text-align: center;
@@ -40,60 +42,111 @@
 
     .mnemonic-active {
       @extend .mnemonic;  
-      background-color: #343292;
+      background-color: #0f358e !important;
       color: #ffffff;
       .number {
-        background-color: #343292;
+        background-color: #0f358e;
         color: #ffffff;
       }
     }
   }
 
-  .words-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 2em;
-    margin-bottom: 4em;
+  .mnemonic-words-wrapper{
+    padding-top: 35px;
+    .words-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 1em 1em;
+      padding-top: 35px;
+      height: 100px;
     
-    
-  
-    .mnemonic {
-      position: relative;
-      height: 32px;
-      margin-bottom: -6px;
-      border-radius: 5px;
-      border: solid 1px #bfc4ce;
-      color: #363291;
-      text-align: center;
-      line-height: 32px;
-      font-weight: bold;
-      font-size: 1em;
-      
-      min-width: 100px;
-      cursor: pointer;
-    }
-
-    .mnemonic:hover {
-        background-color: #363291;
-        color: #ffffff;
+      .mnemonic {
+        position: relative;
+        height: 32px !important;
+        padding-top: 6px;
+        border-radius: 5px;
+        border: solid 1px #bfc4ce;
+        font-size: 12px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.58;
+        letter-spacing: normal;
+        text-align: center;
+        color: #0f358e;
         
+        min-width: 100px;
+        cursor: pointer;
       }
-  }
+  
+      .mnemonic:hover {
+          background-color: #0f358e !important;
+          color: #ffffff;
+          
+        }
+    }
+  
+    .mnemonic-active{
+      color: #ffffff !important;
+      background-color: #0f358e !important;
+    }
+  
+    .hide { display: block; height: 32px; }
+    .test{
+      font-family: "Open Sans";
+      
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    text-align: center;
+    color: #595f6f;
+    
+    }
 
-  .mnemonic-active{
-    color: #ffffff !important;
-    background-color: #343292 !important;
-  }
+    .security-valid{
+      margin-top: 50px;
+      width: 421px;
+      height: 76px;
+      border-radius: 20px;
+      background-color: #aee0f0;
+      padding-top: 15px;
+    
+    
+      .description{
+        font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.38;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+      }
+    }
 
-  .hide { display:none; }
-  .test{
-    font-family: "Open Sans";
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.38;
-  letter-spacing: normal;
-  text-align: center;
-  color: #595f6f;
+    .security-invalid{
+      margin-top: 50px;
+      width: 421px;
+      height: 100px;
+      border-radius: 20px;
+      background-color: #f7dbd1;
+      padding: 15px;
+      
+    
+      .description{
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.38;
+        letter-spacing: normal;
+        text-align: center;
+        color: #000000;
+      }
+    }
   }
+  
