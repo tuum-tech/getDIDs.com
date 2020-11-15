@@ -1,14 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'pages/Homepage';
+import About from 'pages/About';
 import * as serviceWorker from './serviceWorker';
+import { CookiesProvider } from "react-cookie";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import './index.scss'
 
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <CookiesProvider>
+      <Route exact path="/">
+        <App />
+      </Route>
+     
+      <Route path="/about">
+        <About />
+      </Route>
+    </CookiesProvider>
+  </BrowserRouter>
+  ,
   document.getElementById('root')
 );
 

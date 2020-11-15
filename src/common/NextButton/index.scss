@@ -1,19 +1,51 @@
 .next-button {
-  width: 5em;
-  height: 5em;
+  min-width: 240px;
+  min-height: 43px;
+  max-width: 240px;
+  max-height: 43px;
+  border-radius: 8px;
+  
+  background-color: #0f358e;
+  display: flex;
+  align-items: center;
+  padding-top: 3px;
+
+  
+
+  .button-name {
+    font-family: 'Open Sans';
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 9px;
+  }
+
 }
 
 .next-button:hover {
   cursor: pointer;
+  background-color: #335892;
 }
 
-.button-name {
-  font-size: 1.5em;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.37;
-  letter-spacing: normal;
-  text-align: center;
-  color: #38b6ff;
+
+.disabled{
+  background-color: #dddddd;
+  color: #ffffff;
+  cursor: default !important;
 }
+
+.disabled:hover{
+  background-color: #dddddd !important;
+  color: #ffffff !important;
+}
+
+
+
+
+
+

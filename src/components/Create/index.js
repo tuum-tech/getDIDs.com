@@ -3,7 +3,7 @@ import { func } from 'prop-types'
 import NextButton from 'common/NextButton'
 import ModalContainer from 'common/ModalContainer'
 import MnemonicContext from 'context/MnemonicContext'
-
+import GetDids from "services/getdids.service"
 import './index.scss';
 
 function MnemonicItem({number, title}) {
@@ -16,33 +16,40 @@ function MnemonicItem({number, title}) {
 }
 
 function Create({setStep}) {
-  const {mnemonic, setMnemonic, setPrivatekey, setPublickey, setDid} = useContext(MnemonicContext)
+  const {mnemonic, setMnemonic, setDid} = useContext(MnemonicContext)
   useEffect(() => {
-    /*eslint-disable no-undef*/
-    const mnemonicObject = createDid()
-    setMnemonic(mnemonicObject.mnemonic.split(' '))
-    setPrivatekey(mnemonicObject.privateKey)
-    setPublickey(mnemonicObject.publicKey)
-    setDid(mnemonicObject.did)
-    /*eslint-disable no-undef*/
+    
+    async function generateDid()
+    {
+      /*eslint-disable no-undef*/
+      const mnemonicObject = await GetDids.GenerateMnemonics()
+      setMnemonic(mnemonicObject.mnemonic.split(' '))
+      setDid(mnemonicObject.did.replace('did:elastos:', ''))
+      /*eslint-disable no-undef*/
+    }
+
+    generateDid();
+    
   }, [])
   
   return (
     <ModalContainer>
-      <span className="title">Your Mnemonic</span>
+      <span className="title">Your security words</span>
       <div className="mnemonic-wrapper">
         {
           mnemonic.map((item, key) => <MnemonicItem key={`mnemonic-key-${key}`} number={key + 1} title={item} />)
         }
       </div>
+      
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
-        <span className="description">This is your mnemonic security phrase.</span>
-        <div>
-          <span className="description d-block">Lose these words and you will lose the identity.</span>
-          <span className="description d-block">Keep them written down, in order, and safe. </span>
-          <span className="description d-block">Write them down now, in order!</span>
+        <span className="description">These 12 words are what give you, and you alone, access to your DID.  They act as your private mnemonics.</span>
+        <div className="mnemonic-security-info">
+          
+          <span className="description d-block">Never share these mnemonics or store them digitally.</span>
+          <span className="description d-block">Instead, write them down and keep them safe. </span>
+          <span className="description d-block">If you lose these mnemonics, you lose access to your DID.</span>
         </div>
-        <NextButton title="Create" onClick={setStep} />
+        <NextButton title="Next" onClick={setStep} />
       </div>
     </ModalContainer>
   )

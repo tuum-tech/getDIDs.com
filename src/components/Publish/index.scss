@@ -1,0 +1,57 @@
+
+
+.publish-details{
+    width: 352px;
+    height: 324px;
+    border-radius: 20px;
+    background-color: #efeff7;
+    padding: 40px;
+    padding-right: 5px;
+
+    margin-top: 90px;
+
+    .qrcode-did{
+        text-align: center;
+        width: 170px;
+        margin-top: -110px;
+        margin-left: 55px;
+        margin-bottom: 15px;
+        
+
+        .did-text{
+            word-wrap: break-word;
+            font-family: "Open Sans";
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: center;
+            color: #000000;
+            
+        }
+     
+        .copy-text{
+            margin-top: 5px;
+            font-family: "Open Sans";
+            font-size: 10px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.5;
+            letter-spacing: normal;
+            text-align: center;
+            color: #8c8cad;
+            cursor: pointer;
+        }
+        
+        .copy-text:hover{
+            text-decoration: underline;
+        }
+    }
+  
+    
+
+
+}
