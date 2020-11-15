@@ -26,7 +26,7 @@ const GetDids = {
   },
   CallbackTwitter: async (oauth_token, oauth_verifier) =>{
     
-    let response = await fetch("http://192.168.86.27:8081/v1/auth/twitter_callback", {
+    let response = await fetch(`${process.env.REACT_APP_DIDCRED_URL}/v1/auth/twitter_callback`, {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json',
