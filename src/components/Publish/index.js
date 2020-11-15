@@ -50,7 +50,7 @@ function Publish({ setStep }) {
     <ModalContainer>
       <span className="title">Congrats!</span>
       <span className="description">
-          Your identity is now created. Let's publish, and then you're all set!
+          Your identity is now created. Copy your DID if you want to. Then, let's publish, and then you're all set!
         </span>
       <div className="d-flex flex-column justify-content-between align-items-center h-100 mt=4">
        

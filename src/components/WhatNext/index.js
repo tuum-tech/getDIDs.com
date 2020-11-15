@@ -25,7 +25,7 @@ function WhatNext() {
     window.location.href = `https://scheme.elastos.org/app?id=org.elastos.trinity.dapp.did`
   }
   const openAssist = () =>{
-    window.location.href = `https://scheme.elastos.org/app?id=org.elastos.trinity.dapp.did`
+    window.location.href = `https://scheme.elastos.org/app?id=tech.tuum.assist`
   }
   const notify = () =>
     toast.info("☑ Confirmation ID successfully copied to clipboard", {
@@ -60,8 +60,9 @@ function WhatNext() {
           </span>
 
           <span className="description mb-4">
-             You can check for confirmation on the Assist app, and <br/>
-             continue managing your new digital identity on elastOS.
+             You can check the status of your confirmation on the Assist app, and <br/>
+             continue managing your new digital identity on elastOS. You can also try checking whether your DID 
+             has been published <a href="https://idchain.elastos.org">here</a>. 
           </span>
 
           

@@ -45,7 +45,7 @@ function TwitterInfo() {
   return <div className="round-button d-flex flex-column align-items-center mt-5" onClick={openTwitter}>
     <span className="button-name mt-2">
       <FontAwesomeIcon icon={farTwitter} />&nbsp;
-         Login on twitter
+         Sign in using twitter
          </span>
   </div>
 
