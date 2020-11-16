@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import propTypes, { string } from 'prop-types'
+import propTypes from 'prop-types'
 import ModalContainer from 'common/ModalContainer'
 import NextButton from 'common/NextButton'
 import MnemonicContext from "context/MnemonicContext";
@@ -7,14 +7,7 @@ import MnemonicContext from "context/MnemonicContext";
 import './index.scss';
 
 
-function MnemonicItem({ item }) {
-    return (
-        <div className="mnemonic">
-            <span className="number">{item.index}</span>
-            {item.word}
-        </div>
-    )
-}
+
 
 function MnemonicWord({ title, click, hide }) {
     if (hide) {
@@ -52,7 +45,7 @@ function VerifyMnemonics({ setStep }) {
     const [shuffleMnenonics, setShuffleMnenonics] = useState([]);
     const [words, setWords] = useState(["", "", "", "", "", "", "", "", "", "", "", ""]);
     const [nextIndex, setNextIndex] = useState(0);
-    const [item, setItem] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    const item = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     const selectWord = (index) => {
         if (nextIndex > 12) return
         words[nextIndex] = shuffleMnenonics[index]
@@ -67,7 +60,7 @@ function VerifyMnemonics({ setStep }) {
     const containsWord = (word) => {
         let contains = false
         words.forEach((value, index) => {
-            if (value == word) contains = true
+            if (value === word) contains = true
         })
         return contains
     }
@@ -124,7 +117,7 @@ function VerifyMnemonics({ setStep }) {
                 <div className="mnemonic-test-wrapper">
                     {
 
-                        item.map((number, key) => <div className={`${words[number - 1] == "" ? "mnemonic" : "mnemonic-active"}`}>
+                        item.map((number, key) => <div key={`mnemonic-item-${key}`} className={`${words[number - 1] === "" ? "mnemonic" : "mnemonic-active"}`}>
                             <span className="number">{item[number - 1]}</span>
                             {words[number - 1]}
                         </div>)

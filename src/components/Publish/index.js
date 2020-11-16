@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 import { func } from "prop-types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import copyimg from "assets/copy.svg"
 import ModalContainer from "common/ModalContainer";
 import NextButton from "common/NextButton";
 import MnemonicContext from "context/MnemonicContext";
@@ -58,7 +57,8 @@ function Publish({ setStep }) {
         <div className="publish-details" >
           <div className="qrcode-did">
             <QRCode
-              imageSettings={{ width: "120px", height: "120px" }}
+              // imageSettings={{src: `did:elastos:${did}`, width: "120px", height: "120px" }}
+              size={120}
               value={`did:elastos:${did}`}
             />
             <div className="text-center mt-1">

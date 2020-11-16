@@ -1,4 +1,3 @@
-'use strict';
 import { ElastosClient } from "@tuum-tech/elastos-js-sdk"
 
 const GetDids = {
@@ -88,10 +87,8 @@ const GetDids = {
       } 
     }
     let signedDocument = ElastosClient.didDocuments.sealDocument(didelement, diddocument)
-    console.log("is document valid", ElastosClient.didDocuments.isValid(diddocument, didelement))
-
     let tx = ElastosClient.idChainRequest.generateCreateRequest(signedDocument, didelement)
-    console.log("is tx valid", ElastosClient.idChainRequest.isValid(tx, didelement))
+    
 
     let url = `${process.env.REACT_APP_ASSIST_URL}/v1/didtx/create`
     let data = {
@@ -111,9 +108,6 @@ const GetDids = {
     });
 
     let json = await response.json()
-
-    console.log(json)
-
     return json.data.confirmation_id
 
     

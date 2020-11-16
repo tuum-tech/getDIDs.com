@@ -56,7 +56,6 @@ function TwitterInfo() {
 function Import({ setStep, setMnemonic }) {
   const { name, email, birthDate, twitter_user, setName, setEmail, setBirthDate } = useContext(MnemonicContext)
   const updateName = (event) => {
-    console.log("update name", event.target.value)
     setName(event.target.value)
   }
 
