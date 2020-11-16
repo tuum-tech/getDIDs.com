@@ -41,12 +41,12 @@ function renderComponent(step, setStep) {
   const search = useLocation().search;
   const oauth_token = new URLSearchParams(search).get('oauth_token');
   const oauth_verifier = new URLSearchParams(search).get('oauth_verifier');
-  const [twitter_user, setTwitterUser] = useState(null);
-  const [twitter_name, setTwitterName] = useState(null);
-  const [confirmationID, setConfirmationID] = useState(null);
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [birthDate, setBirthDate] = useState(null);
+  const [twitter_user, setTwitterUser] = useState("");
+  const [twitter_name, setTwitterName] = useState("");
+  const [confirmationID, setConfirmationID] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthDate, setBirthDate] = useState("");
 
   const [isLogged, setIsLogged] = useState(false);
   

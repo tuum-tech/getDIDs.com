@@ -1,6 +1,5 @@
 import React from 'react'
 import arrowRight from 'assets/arrow-right-small.svg'
-import { Link } from "react-router-dom";
 import './index.scss'
 function Footer(props) {
   return (

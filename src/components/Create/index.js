@@ -28,9 +28,9 @@ function Create({setStep}) {
       /*eslint-disable no-undef*/
     }
 
-    generateDid();
+    if (!mnemonic || mnemonic[0] === "-") generateDid();
     
-  }, [])
+  })
   
   return (
     <ModalContainer>
