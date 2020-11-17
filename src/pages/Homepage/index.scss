@@ -6,8 +6,23 @@
   align-items: center;
 }
 
-.header {
+
+.title {
+  margin-bottom: 1.2em !important;
   @media screen and (max-width: 576px) {
-    padding-left: 30px;
+    margin: 0.8em !important;
   }
+}
+
+.description{
+  @media (max-width: 576px) {
+   margin: 0;   
+  }
+}
+
+.next-button{
+  @media (max-width: 576px) {
+    margin-top: 10px;
+   }
+  
 }

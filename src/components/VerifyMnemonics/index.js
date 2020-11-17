@@ -125,8 +125,8 @@ function VerifyMnemonics({ setStep }) {
 
                 </div>
                 <div className="d-flex flex-column justify-content-between align-items-center h-100 mnemonic-words-wrapper">
-                {test()}
-                {showButton()}
+                    {test()}
+                    {showButton()}
                 </div>
                 
             </div>
