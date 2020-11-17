@@ -1,18 +1,10 @@
 
-
-.title {
-  margin-bottom: 1.2em !important;
-  @media screen and (max-width: 576px) {
-    margin: 0.8em !important;
-  }
-}
 .mnemonic-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 2em;
   margin-bottom: 4em;
-  padding-left: 75px;
-  padding-right: 75px;
+  
 
   .mnemonic {
     position: relative;
@@ -49,6 +41,14 @@
       font-size: 12px;
     }
   }
+
+  @media (max-width: 576px) {
+    padding-left: 25px;
+    padding-right: 25px;
+    justify-content: space-around;
+    margin-bottom: 2em;
+    grid-gap: 1em 2em;
+  }
 }
 
 .mnemonic-security-info{
@@ -68,4 +68,15 @@
   text-align: center;
   color: #000000;
   }
+
+  @media (max-width: 576px) {
+    width: 90%;
+    height: auto;
+    justify-content: space-around;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 2em;
+  }
+  
 }
+

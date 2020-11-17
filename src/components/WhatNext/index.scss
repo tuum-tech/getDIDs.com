@@ -23,6 +23,15 @@
     text-align: left;
     margin-left: 20px;
   }
+
+  @media (max-width: 576px) {
+    width: 95%;
+    justify-content: space-around;
+
+    span{
+      margin-left: 10px;
+    }
+  }
 }
 
 .next-elastos {
@@ -71,9 +80,31 @@
 }
 
 .content {
-  // padding-left: 100px;
-  // padding-right: 100px;
+  
 
   height: 100%;
   margin-bottom: 80px;
+
+  .last-message{
+    margin-bottom: 50px;
+  }
+
+
+  @media (max-width: 576px) {
+    width: 95%;
+    justify-content: space-around;
+
+    .description{
+      margin-bottom: 30px;
+    }
+
+    .confirmation-id{
+      margin-bottom: 30px;
+    }
+
+    .last-message{
+      margin: 0;
+    }
+  }
+
 }

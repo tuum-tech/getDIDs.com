@@ -86,8 +86,8 @@ function Import({ setStep, setMnemonic }) {
   return (
     <ModalContainer>
       <span className="title">Add details</span>
-      <div className="d-flex flex-column justify-content-between align-items-center h-100">
-        <div className="d-flex flex-column align-items-center h-100">
+      <div className="d-flex flex-column justify-content-between align-items-center h-100 import-content">
+        <div className="d-flex flex-column align-items-center h-100 ">
           <span className="description mb-5">Add your details to begin building your digital identity.</span>
 
           <TwitterInfo />

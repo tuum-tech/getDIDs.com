@@ -35,10 +35,12 @@
 
   @media (max-width: 576px) {
     width: 90%;
-    padding: 2em 1.2em;
-    height: 90%;
+    padding: 10px ;
+    height: auto;
+    min-height: 90%;
+    
     justify-content: space-around;
-
+    
     .title {
       margin: 0;
     }

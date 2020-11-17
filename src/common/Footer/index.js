@@ -4,7 +4,7 @@ import './index.scss'
 function Footer(props) {
   return (
     <div className="d-flex justify-content-center link-text">
-        <a href="https://elastos.academy/get-dids/">
+        <a href="https://elastos.academy/get-dids/" target="_blank">
           Learn more about DID at Elastos Academy
           <img src={arrowRight} alt="arrow-right" className="align-self-center ml-1" />
           </a>

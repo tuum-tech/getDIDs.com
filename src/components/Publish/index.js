@@ -28,7 +28,7 @@ function Publish({ setStep }) {
       birthDate: birthDate,
       twitter: twitter_user
     })
-
+    
     setConfirmationID(confirmation)
     setStep()
   }

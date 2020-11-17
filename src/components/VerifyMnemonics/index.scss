@@ -1,3 +1,7 @@
+
+
+
+
 .mnemonic-test-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -47,6 +51,17 @@
       .number {
         background-color: #0f358e;
         color: #ffffff;
+      }
+    }
+
+
+    @media (max-width: 576px) {
+      padding: 0;
+      width: 70%;
+      justify-content: space-around;
+      margin-bottom: 15px;
+      .mnemonic{
+        min-width: 86px;
       }
     }
   }
@@ -146,6 +161,38 @@
         letter-spacing: normal;
         text-align: center;
         color: #000000;
+      }
+    }
+
+    @media (max-width: 576px) {
+      padding: 0;
+      justify-content: space-around;
+      
+      
+
+      .words-wrapper{
+        padding: 0;
+        margin: 0;
+        height: auto;
+        margin-top: 15px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 1em 1em;
+        
+        .mnemonic {
+          background-color: #ffffff;
+        }
+      }
+
+      .security-invalid{
+        width: 95%;
+        padding: 10px;
+        
+      }
+
+      .security-valid{
+        width: 95%;
+        padding: 10px;
+        
       }
     }
   }
