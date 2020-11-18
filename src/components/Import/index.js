@@ -14,11 +14,49 @@ import twittericon from 'assets/twittericon.svg'
 import "react-toastify/dist/ReactToastify.css";
 import './index.scss';
 
+import ModernDatepicker from 'react-modern-datepicker';
+
 function ItemData({ icon, placeholder, type, value, onChanged }) {
   return <div className="item-data">
     <img src={icon} alt={placeholder} />
     <input type={type} value={value} onChange={onChanged} placeholder={placeholder} />
+    
   </div>
+}
+
+function DateData({ icon, placeholder, value, onChanged }) {
+
+  if (value)
+  {
+    
+    return <div className="item-data">
+    <img src={icon} alt={placeholder} />
+    <ModernDatepicker
+				date={value}
+				format={'MM-DD-YYYY'}
+				onChange={onChanged}
+        placeholder={placeholder}
+        maxDate={new Date()}
+			/><span className="clear" onClick={() => onChanged(null)}>
+          Clear
+      </span>
+      </div>
+  }
+
+  return <div className="item-data">
+    <img src={icon} alt={placeholder} />
+    <ModernDatepicker
+				date={value}
+        format={'MM-DD-YYYY'}
+				onChange={onChanged}
+        placeholder={placeholder}
+        maxDate={new Date()}
+			/>
+      </div>
+  
+  
+
+  
 }
 
 function TwitterInfo() {
@@ -63,8 +101,8 @@ function Import({ setStep, setMnemonic }) {
     setEmail(event.target.value)
   }
 
-  const updateDateBirth = (event) => {
-    setBirthDate(event.target.value)
+  const updateDateBirth = (date) => {
+    setBirthDate(date)
   }
 
   const NextStep = async () => {
@@ -93,7 +131,7 @@ function Import({ setStep, setMnemonic }) {
           <TwitterInfo />
           <ItemData icon={usericon} type="text" value={name} onChanged={updateName} placeholder="Enter Name" />
           <ItemData icon={emailicon} type="email" value={email} onChanged={updateEmail} placeholder="Enter Email" />
-          <ItemData icon={birthicon} type="date" value={birthDate} onChanged={updateDateBirth} placeholder="Enter Date of Birth" />
+          <DateData icon={birthicon} value={birthDate} onChanged={updateDateBirth} placeholder="Select Date of Birth" />
 
 
 

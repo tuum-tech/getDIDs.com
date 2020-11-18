@@ -46,7 +46,7 @@ function renderComponent(step, setStep) {
   const [publishStatus, setPublishStatus] = useState({confirmation_id:"", status: "Pending"});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [birthDate, setBirthDate] = useState(null);
 
   const [isLogged, setIsLogged] = useState(false);
   

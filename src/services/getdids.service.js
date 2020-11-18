@@ -59,7 +59,7 @@ const GetDids = {
       ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcEmail)
     }
 
-    if (profile.birthDate && profile.birthDate !== "")
+    if (profile.birthDate)
     {
       let vcBirthDate = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "BirthDate", ["ProfileCredential"], profile.birthDate)
       ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcBirthDate)
@@ -67,7 +67,7 @@ const GetDids = {
 
     if (profile.twitter)
     {
-      let url = `${process.env.REACT_APP_DIDCRED_URL}/v1/validation/twitter_handle`
+      let url = `${process.env.REACT_APP_DIDCRED_URL}/v1/validation/internet_account`
       let response = await fetch(url, {
            method: 'POST',
            headers: {
@@ -76,7 +76,8 @@ const GetDids = {
            },
            body: JSON.stringify({
              did: didelement.did,
-             value: profile.twitter
+             credential_type: "twitter",
+             credential_value: profile.twitter
            })
       });
   
@@ -127,7 +128,6 @@ const GetDids = {
     });
 
     let json = await response.json()
-    console.log(json)
     return {
       confirmation_id: confirmation_id,
       status: json.data.status
