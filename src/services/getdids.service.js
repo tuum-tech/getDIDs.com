@@ -5,7 +5,7 @@ const GetDids = {
     return await ElastosClient.did.generateNew()
   },
   GetRequestToken: async () =>{
-    let url = `${process.env.REACT_APP_DIDCRED_URL}/v1/auth/twitter`
+    let url = `${process.env.REACT_APP_DIDCRED_URL}/v1/auth/twitter_request`
     let response = await fetch(url, {
          method: 'GET',
          headers: {
