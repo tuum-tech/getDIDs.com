@@ -27,7 +27,7 @@ function WhatNext() {
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
         <div className="d-flex flex-column justify-content-between align-items-center content">
           <span className="description">
-            Your identity is being published in the background. This process may take up to 10 minutes. You can check for status of this on the Blockchain Explorer.
+            Your identity is being published in the background. This process may take up to 10 minutes. You can check for status of this on the <a href="https://idchain.elastos.org" target="_blank">Blockchain Explorer</a>.
           </span>
 
           <span className="identity-status">Identity Status</span>
