@@ -59,7 +59,7 @@ const GetDids = {
       ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcEmail)
     }
 
-    if (profile.birthDate && profile.birthDate !== "")
+    if (profile.birthDate)
     {
       let vcBirthDate = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "BirthDate", ["ProfileCredential"], profile.birthDate)
       ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcBirthDate)
@@ -127,7 +127,6 @@ const GetDids = {
     });
 
     let json = await response.json()
-    console.log(json)
     return {
       confirmation_id: confirmation_id,
       status: json.data.status
