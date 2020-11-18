@@ -43,7 +43,7 @@ function renderComponent(step, setStep) {
   const oauth_verifier = new URLSearchParams(search).get('oauth_verifier');
   const [twitter_user, setTwitterUser] = useState("");
   const [twitter_name, setTwitterName] = useState("");
-  const [confirmationID, setConfirmationID] = useState("");
+  const [publishStatus, setPublishStatus] = useState({confirmation_id:"", status: "Pending"});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [birthDate, setBirthDate] = useState("");
@@ -113,8 +113,8 @@ function renderComponent(step, setStep) {
         setName,
         setBirthDate,
         setEmail,
-        setConfirmationID,
-        confirmationID,
+        setPublishStatus,
+        publishStatus,
       }}
     >
       <ToastContainer />

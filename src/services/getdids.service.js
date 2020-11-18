@@ -108,10 +108,34 @@ const GetDids = {
     });
 
     let json = await response.json()
-    return json.data.confirmation_id
+    return {
+      confirmation_id: json.data.confirmation_id,
+      status: "Pending"
+    }
 
     
+  },
+  getTxStatus: async (confirmation_id) =>{
+    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/didtx/confirmation_id/${confirmation_id}`
+
+    let response = await fetch(url, {
+         method: 'GET',
+         headers: {
+            'Content-Type': 'application/json',
+            "Authorization": process.env.REACT_APP_ASSIST_KEY
+         }
+    });
+
+    let json = await response.json()
+    console.log(json)
+    return {
+      confirmation_id: confirmation_id,
+      status: json.data.status
+    }
   }
+
+
+  
 };
 
 export default GetDids;

@@ -19,7 +19,7 @@ var QRCode = require("qrcode.react");
 
 
 function Publish({ setStep }) {
-  const { did, name, email, birthDate, twitter_user, setConfirmationID, mnemonic } = useContext(MnemonicContext)
+  const { did, name, email, birthDate, twitter_user, setPublishStatus, mnemonic } = useContext(MnemonicContext)
 
   const publishDocument = async () => {
     let confirmation = await GetDids.PublishDocument(mnemonic, {
@@ -29,7 +29,7 @@ function Publish({ setStep }) {
       twitter: twitter_user
     })
     
-    setConfirmationID(confirmation)
+    setPublishStatus(confirmation)
     setStep()
   }
 
