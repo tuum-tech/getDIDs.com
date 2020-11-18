@@ -49,35 +49,7 @@
   margin-bottom: 20px;
 }
 
-.confirmation-id {
-  font-family: "Open Sans";
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.38;
-  letter-spacing: normal;
-  text-align: center;
-  color: #000000;
 
-  .copy-text {
-    margin-top: 5px;
-    font-family: "Open Sans";
-    font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-align: center;
-  color: #b2b2b2;
-    cursor: pointer;
-  }
-
-  .copy-text:hover {
-    text-decoration: underline;
-  }
-}
 
 .content {
   
@@ -85,8 +57,88 @@
   height: 100%;
   margin-bottom: 80px;
 
+  .description{
+    margin: 20px;
+  }
+
+  .identity-status{
+    margin-bottom: 10px;
+    font-family: "Open Sans";
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #595f6f;
+  }
+
+  .confirmation-id {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  
+    width: 367.8px;
+    height: 45px;
+    border-radius: 15px;
+    background-color: #efeff7;
+    padding: 10px;
+  
+    .confirmation-status{
+      width: 100% !important;
+    }
+  
+    .confirmation-refresh{
+      margin-top: 5px;
+      float: right;
+      font-family: "Open Sans";
+      font-size: 12px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.5;
+      letter-spacing: normal;
+      text-align: center;
+      color: #8799c4;
+      cursor: pointer;
+    }
+    
+  }
+  .elastos-download{
+    font-family: Montserrat;
+    font-size: 28px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    letter-spacing: -0.58px;
+    text-align: center;
+    color: #000000;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .store-download{
+    img:first-child{
+      margin-right: 15px;
+    }
+    img:last-child{
+      margin-left: 15px;
+    }
+  }
+
   .last-message{
+    margin-top: 50px;
     margin-bottom: 50px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
 
 
@@ -100,10 +152,12 @@
 
     .confirmation-id{
       margin-bottom: 30px;
+      width: 90%;
     }
 
     .last-message{
       margin: 0;
+      margin-bottom: 20px;
     }
   }
 
