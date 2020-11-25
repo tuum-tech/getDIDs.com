@@ -28,7 +28,7 @@
     width: 95%;
     justify-content: space-around;
 
-    span{
+    span {
       margin-left: 10px;
     }
   }
@@ -49,20 +49,100 @@
   margin-bottom: 20px;
 }
 
+.elastos-content {
+  width: 100%;
 
+  background-color: #f5f5fd;
+  border-radius: 0px 0px 47px 47px;
+  padding: 20px;
+  .elastos-download {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: -0.33px;
+    text-align: center;
+    color: #000000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .last-message {
+    width: 318px;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+
+    margin-bottom: 20px;
+  }
+
+  .store-download {
+    img:first-child {
+      margin-right: 15px;
+    }
+    img:last-child {
+      margin-left: 15px;
+    }
+  }
+}
 
 .content {
-  
-
   height: 100%;
   margin-bottom: 80px;
 
-  .description{
+  .description {
     margin: 20px;
   }
 
-  .identity-status{
-    margin-bottom: 10px;
+  
+
+  .qrcode-did {
+    text-align: center;
+    
+    display: block;
+
+    margin-bottom: 15px;
+
+    .did-item {
+      width: 100%;
+      margin-top: 10px;
+      display: block;
+      
+      .did-text {
+        margin-left: 15px;
+        width: 180px;        
+        word-wrap: break-word;
+        font-family: "Open Sans";
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        text-align: center;
+        color: #000000;
+        
+        
+      }
+      .copy-icon {
+        margin-top: 11px;
+        margin-left: 15px;
+        width: 13.4px;
+        height: 13.4px;
+        float: right;
+      }
+    }
+  }
+
+  .confirmation-id {
+    
     font-family: "Open Sans";
     font-size: 12px;
     font-weight: normal;
@@ -71,31 +151,19 @@
     line-height: 1.5;
     letter-spacing: normal;
     text-align: center;
-    color: #595f6f;
-  }
-
-  .confirmation-id {
-    font-family: "Open Sans";
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.38;
-    letter-spacing: normal;
-    text-align: center;
     color: #000000;
-  
+
     width: 367.8px;
     height: 45px;
     border-radius: 15px;
     background-color: #efeff7;
     padding: 10px;
-  
-    .confirmation-status{
+
+    .confirmation-status {
       width: 100% !important;
     }
-  
-    .confirmation-refresh{
+
+    .confirmation-refresh {
       margin-top: 5px;
       float: right;
       font-family: "Open Sans";
@@ -109,56 +177,48 @@
       color: #8799c4;
       cursor: pointer;
     }
+  }
+
+  .confirmation-pending {
+    @extend .confirmation-id;
+    background-color: #f7dbd1;
+
+  }
+
+  .confirmation-quarentined {
+    @extend .confirmation-id;
+    background-color: #f7d1d1;
+
+  }
+
+  .confirmation-processing {
+    @extend .confirmation-id;
+    background-color: #d5eef6;
     
   }
-  .elastos-download{
-    font-family: Montserrat;
-    font-size: 28px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.14;
-    letter-spacing: -0.58px;
-    text-align: center;
-    color: #000000;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
 
-  .store-download{
-    img:first-child{
-      margin-right: 15px;
-    }
-    img:last-child{
-      margin-left: 15px;
-    }
+  .confirmation-completed {
+    @extend .confirmation-id;
+    background-color: #d5f6e3;
+    
   }
-
-  .last-message{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 40px;
-    margin-right: 40px;
-  }
-
 
   @media (max-width: 576px) {
     width: 95%;
     justify-content: space-around;
 
-    .description{
+    .description {
       margin-bottom: 30px;
     }
 
-    .confirmation-id{
+    .confirmation-id {
       margin-bottom: 30px;
       width: 90%;
     }
 
-    .last-message{
+    .last-message {
       margin: 0;
       margin-bottom: 20px;
     }
   }
-
 }

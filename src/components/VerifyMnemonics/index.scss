@@ -1,5 +1,25 @@
 
+.title-items{
+  display: inline;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+  
 
+  .back-icon{
+    margin-top: 10px;
+    
+    float: left;
+    cursor: pointer;
+  }
+
+}
+
+.buttons-collection{
+  .next-button:first-child{
+    margin-bottom: 5px;
+  }
+}
 
 
 .mnemonic-test-wrapper {

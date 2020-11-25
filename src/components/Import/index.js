@@ -129,9 +129,9 @@ function Import({ setStep, setMnemonic }) {
           <span className="description mb-5">Add your details to begin building your digital identity.</span>
 
           <TwitterInfo />
-          <ItemData icon={usericon} type="text" value={name} onChanged={updateName} placeholder="Enter Name" />
-          <ItemData icon={emailicon} type="email" value={email} onChanged={updateEmail} placeholder="Enter Email" />
-          <DateData icon={birthicon} value={birthDate} onChanged={updateDateBirth} placeholder="Select Date of Birth" />
+          <ItemData icon={usericon} type="text" value={name} onChanged={updateName} placeholder="Enter Name (optional)" />
+          <ItemData icon={emailicon} type="email" value={email} onChanged={updateEmail} placeholder="Enter Email (optional)" />
+          <DateData icon={birthicon} value={birthDate} onChanged={updateDateBirth} placeholder="Select Date of Birth (optional)" />
 
 
 

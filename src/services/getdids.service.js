@@ -49,19 +49,19 @@ const GetDids = {
 
     if (profile.name && profile.name !== "")
     {
-      let vcName = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "Name", ["ProfileCredential"], profile.name)
+      let vcName = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "name", ["ProfileCredential"], profile.name)
       ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcName)
     }
 
     if (profile.email && profile.email !== "")
     {
-      let vcEmail = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "Email", ["EmailCredential"], profile.email)
+      let vcEmail = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "nmail", ["EmailCredential"], profile.email)
       ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcEmail)
     }
 
     if (profile.birthDate)
     {
-      let vcBirthDate = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "BirthDate", ["ProfileCredential"], profile.birthDate)
+      let vcBirthDate = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "birthdate", ["ProfileCredential"], profile.birthDate)
       ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcBirthDate)
     }
 

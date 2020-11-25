@@ -28,6 +28,8 @@ function Publish({ setStep }) {
       birthDate: birthDate,
       twitter: twitter_user
     })
+
+    //let confirmation = "asdasdd"
     
     setPublishStatus(confirmation)
     setStep()
@@ -47,38 +49,17 @@ function Publish({ setStep }) {
     });
   return (
     <ModalContainer>
-      <span className="title">Congrats!</span>
+      <span className="title">Nearly completed!</span>
       <span className="description">
-          Your identity is now created. Copy your DID if you want to. Then, let's publish, and then you're all set!
+      Your identity is being created. We are not quite finished yet, let’s publish these details, and then you’re all set!
         </span>
-      <div className="d-flex flex-column justify-content-between align-items-center h-100 mt=4">
-       
-
-        <div className="publish-details" >
-          <div className="qrcode-did">
-            <QRCode
-              // imageSettings={{src: `did:elastos:${did}`, width: "120px", height: "120px" }}
-              size={120}
-              value={`did:elastos:${did}`}
-            />
-            <div className="text-center mt-1">
-              <span className="did-text">{`did:elastos:${did}`}</span>
-              
-              <CopyToClipboard
-                text={`did:elastos:${did}`}
-                onCopy={notify}
-              >
-                <span className="copy-text d-block">Click to copy address</span>
-              </CopyToClipboard>
-            </div>
+      <div className="d-flex flex-column justify-content-between align-items-center h-100">
+          <div className="confirmation-items">
+            <ConfirmationDetail icon={twittericon} value={twitter_user ? "@" + twitter_user : ""} />
+            <ConfirmationDetail icon={usericon} value={name} />
+            <ConfirmationDetail icon={emailicon} value={email} />
+            <ConfirmationDetail icon={birthicon} value={birthDate} />
           </div>
-
-          <ConfirmationDetail icon={twittericon} value={twitter_user ? "@" + twitter_user : ""} />
-          <ConfirmationDetail icon={usericon} value={name} />
-          <ConfirmationDetail icon={emailicon} value={email} />
-          <ConfirmationDetail icon={birthicon} value={birthDate} />
-        </div>
-
         <NextButton title="Finish" onClick={publishDocument} />
       </div>
     </ModalContainer>
