@@ -1,4 +1,5 @@
 import { ElastosClient } from "@tuum-tech/elastos-js-sdk"
+import Elastos from "./elastos.service"
 
 const GetDids = {
   GenerateMnemonics: async () =>{
@@ -45,50 +46,23 @@ const GetDids = {
   },
   PublishDocument: async (mnemonic, profile) => {
     let didelement = await ElastosClient.did.loadFromMnemonic(mnemonic.join(' '))
-    let diddocument = ElastosClient.didDocuments.newDIDDocument(didelement)
+    let isValid = false;
 
-    if (profile.name && profile.name !== "")
-    {
-      let vcName = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "name", ["ProfileCredential"], profile.name)
-      ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcName)
+
+    //Temporary bypass signature error
+    let signedDocument = null;
+    let tx = null
+    while(!isValid){
+        signedDocument = await Elastos.generateDocument(didelement, profile);
+        isValid = ElastosClient.didDocuments.isValid(signedDocument, didelement)
     }
 
-    if (profile.email && profile.email !== "")
-    {
-      let vcEmail = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "nmail", ["EmailCredential"], profile.email)
-      ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcEmail)
+    //Temporary bypass signature error
+    isValid = false;
+    while(!isValid){
+      tx = ElastosClient.idChainRequest.generateCreateRequest(signedDocument, didelement)
+      isValid = ElastosClient.idChainRequest.isValid(tx, didelement)
     }
-
-    if (profile.birthDate)
-    {
-      let vcBirthDate = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "birthdate", ["ProfileCredential"], profile.birthDate)
-      ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcBirthDate)
-    }
-
-    if (profile.twitter)
-    {
-      let url = `${process.env.REACT_APP_DIDCRED_URL}/v1/validation/internet_account`
-      let response = await fetch(url, {
-           method: 'POST',
-           headers: {
-              'Content-Type': 'application/json',
-              "Authorization": process.env.REACT_APP_DIDCRED_KEY
-           },
-           body: JSON.stringify({
-             did: didelement.did,
-             credential_type: "twitter",
-             credential_value: profile.twitter
-           })
-      });
-  
-      if (response.ok) {
-        let json = await response.json();
-        let vc = json.data.verifiable_credential
-        ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vc)
-      } 
-    }
-    let signedDocument = ElastosClient.didDocuments.sealDocument(didelement, diddocument)
-    let tx = ElastosClient.idChainRequest.generateCreateRequest(signedDocument, didelement)
     
 
     let url = `${process.env.REACT_APP_ASSIST_URL}/v1/didtx/create`
