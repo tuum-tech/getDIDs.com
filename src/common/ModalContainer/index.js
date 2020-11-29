@@ -2,9 +2,9 @@ import React from 'react'
 import propTypes from 'prop-types'
 import './index.scss'
 
-function ModalContainer({children}) {
+function ModalContainer({useFull = false, children}) {
   return (
-    <div className="modal-container">
+    <div className={useFull ? "modal-container-full" : "modal-container"}>
       {children}
     </div>
   )

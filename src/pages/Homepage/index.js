@@ -26,7 +26,7 @@ function renderComponent(step, setStep) {
     case 3:
       return <Create setStep={() => setStep(4)} />;
     case 4:
-      return <VerifyMnemonics setStep={() => setStep(5)} />;
+      return <VerifyMnemonics setStep={() => setStep(5)} setBack={() => setStep(3)} />;
     case 5:
       return <Publish setStep={() => setStep(6)} />;
     case 6:

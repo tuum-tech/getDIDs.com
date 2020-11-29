@@ -4,7 +4,7 @@
   border-radius: 47px;
   box-shadow: 0 20px 25px 0 rgba(132, 132, 132, 0.1);
   background-color: #ffffff;
-  padding: 47px;
+  padding: 25px 47px;
 
   display: flex;
   flex-direction: column;
@@ -45,4 +45,9 @@
       margin: 0;
     }
   }
+}
+
+.modal-container-full{
+  @extend .modal-container;
+  padding: 0px !important;
 }

@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import ModalContainer from 'common/ModalContainer'
 import NextButton from 'common/NextButton'
 import MnemonicContext from "context/MnemonicContext";
-
+import backicon from 'assets/back-arrow.svg'
 import './index.scss';
 
 
@@ -40,7 +40,7 @@ function shuffle(array) {
 
 
 
-function VerifyMnemonics({ setStep }) {
+function VerifyMnemonics({ setStep, setBack }) {
     const { mnemonic } = useContext(MnemonicContext)
     const [shuffleMnenonics, setShuffleMnenonics] = useState([]);
     const [words, setWords] = useState(["", "", "", "", "", "", "", "", "", "", "", ""]);
@@ -55,6 +55,12 @@ function VerifyMnemonics({ setStep }) {
 
     const isValid = () => {
         return mnemonic.every((value, index) => value === words[index])
+    }
+
+    const undo = () => {
+        words[nextIndex - 1] = ""
+        setWords(words)
+        setNextIndex(nextIndex -1);
     }
 
     const containsWord = (word) => {
@@ -97,7 +103,10 @@ function VerifyMnemonics({ setStep }) {
     }
 
     const showButton = ()=>{
-        if (nextIndex < 12 || isValid()) return <NextButton title="Continue" onClick={setStep} enabled={isValid()} />
+        if (nextIndex < 12 || isValid()) return <div className="buttons-collection">
+            <NextButton title="Undo" onClick={undo} enabled={nextIndex > 0 && !isValid()} />
+            <NextButton title="Continue" onClick={setStep} enabled={isValid()} />
+        </div>
 
         return <NextButton title="Start over" onClick={reset} />
     }
@@ -109,10 +118,16 @@ function VerifyMnemonics({ setStep }) {
 
     if (shuffleMnenonics.length <= 0) setShuffleMnenonics(shuffle([...mnemonic]))
    
+  
 
     return (
         <ModalContainer>
-            <span className="title mt-3">Security check</span>
+            <div className="title-items" >
+                <img src={backicon} alt="go back" className="back-icon" onClick={setBack} />   
+
+                <span className="title">Security check</span>
+            </div>
+            
             <div className="d-flex flex-column justify-content-between align-items-center h-100">
                 <div className="mnemonic-test-wrapper">
                     {
