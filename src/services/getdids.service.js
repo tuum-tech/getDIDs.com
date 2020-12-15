@@ -1,4 +1,4 @@
-import { ElastosClient } from "@tuum-tech/elastos-js-sdk"
+import { ElastosClient } from "@elastos/elastos-js-sdk"
 import Elastos from "./elastos.service"
 
 const GetDids = {

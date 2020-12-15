@@ -1,4 +1,4 @@
-import { ElastosClient } from "@tuum-tech/elastos-js-sdk"
+import { ElastosClient } from "@elastos/elastos-js-sdk"
 
 const Elastos = {
     generateDocument: async (didelement, profile) => {
@@ -6,18 +6,18 @@ const Elastos = {
         let diddocument = ElastosClient.didDocuments.newDIDDocument(didelement)
 
         if (profile.name && profile.name !== "") {
-            let vcName = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "name", ["ProfileCredential"], profile.name)
-            ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcName)
+            let vcName = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "name", ["BasicProfileCredential"], profile.name)
+            ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(diddocument, vcName)
         }
 
         if (profile.email && profile.email !== "") {
-            let vcEmail = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "nmail", ["EmailCredential"], profile.email)
-            ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcEmail)
+            let vcEmail = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "email", ["BasicProfileCredential", "EmailCredential"], profile.email)
+            ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(diddocument, vcEmail)
         }
 
         if (profile.birthDate) {
-            let vcBirthDate = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "birthdate", ["ProfileCredential"], profile.birthDate)
-            ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vcBirthDate)
+            let vcBirthDate = ElastosClient.didDocuments.createVerifiableCredential(didelement, didelement.did, "birthdate", ["BasicProfileCredential"], profile.birthDate)
+            ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(diddocument, vcBirthDate)
         }
 
         if (profile.twitter) {
@@ -38,7 +38,7 @@ const Elastos = {
             if (response.ok) {
                 let json = await response.json();
                 let vc = json.data.verifiable_credential
-                ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(didelement, diddocument, vc)
+                ElastosClient.didDocuments.addVerfiableCredentialToDIDDocument(diddocument, vc)
             }
         }
         return ElastosClient.didDocuments.sealDocument(didelement, diddocument)
