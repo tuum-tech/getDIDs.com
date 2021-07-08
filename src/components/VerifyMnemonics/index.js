@@ -54,7 +54,7 @@ function VerifyMnemonics({ setStep, setBack }) {
     }
 
     const isValid = () => {
-        return mnemonic.every((value, index) => value === words[index])
+        return true //mnemonic.every((value, index) => value === words[index])
     }
 
     const undo = () => {

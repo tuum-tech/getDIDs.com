@@ -10,23 +10,26 @@ import emailicon from 'assets/email.svg'
 import birthicon from 'assets/birthicon.svg'
 import twittericon from 'assets/twittericon.svg'
 import "react-toastify/dist/ReactToastify.css";
-import GetDids from "services/getdids.service"
 import './index.scss';
+import Elastos from "services/elastos.service";
+import GetDids from "services/getdids.service";
 
 
 
 function Publish({ setStep }) {
-  const { name, email, birthDate, twitter_user, setPublishStatus, mnemonic } = useContext(MnemonicContext)
+  const { name, email, birthDate, twitter_user, setPublishStatus, mnemonic, did } = useContext(MnemonicContext)
 
   const publishDocument = async () => {
-    let confirmation = await GetDids.PublishDocument(mnemonic, {
+    
+    
+    
+    let confirmation = await Elastos.PublishDocument(mnemonic.join(" "), {
+      did: did,
       name: name,
       email: email,
       birthDate: birthDate,
       twitter: twitter_user
     })
-
-    
     setPublishStatus(confirmation)
     setStep()
   }

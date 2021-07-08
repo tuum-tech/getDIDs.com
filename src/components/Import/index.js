@@ -128,7 +128,7 @@ function Import({ setStep, setMnemonic }) {
         <div className="d-flex flex-column align-items-center h-100 ">
           <span className="description mb-5">Add your details to begin building your digital identity.</span>
 
-          <TwitterInfo />
+          {/* <TwitterInfo /> */}
           <ItemData icon={usericon} type="text" value={name} onChanged={updateName} placeholder="Enter Name (optional)" />
           <ItemData icon={emailicon} type="email" value={email} onChanged={updateEmail} placeholder="Enter Email (optional)" />
           <DateData icon={birthicon} value={birthDate} onChanged={updateDateBirth} placeholder="Select Date of Birth (optional)" />

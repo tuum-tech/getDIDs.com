@@ -3,8 +3,8 @@ import { func } from 'prop-types'
 import NextButton from 'common/NextButton'
 import ModalContainer from 'common/ModalContainer'
 import MnemonicContext from 'context/MnemonicContext'
-import GetDids from "services/getdids.service"
 import './index.scss';
+import Elastos from 'services/elastos.service'
 
 function MnemonicItem({number, title}) {
   return (
@@ -22,9 +22,10 @@ function Create({setStep}) {
     async function generateDid()
     {
       /*eslint-disable no-undef*/
-      const mnemonicObject = await GetDids.GenerateMnemonics()
-      setMnemonic(mnemonicObject.mnemonic.split(' '))
-      setDid(mnemonicObject.did.replace('did:elastos:', ''))
+      const mnemonics = await Elastos.GenerateMnemonics()
+      setMnemonic(mnemonics.split(" "))
+      let diddocument = await Elastos.GetDIDDocument(mnemonics)
+      setDid(diddocument.getDefaultPublicKeyId().getDid().toString())
       /*eslint-disable no-undef*/
     }
 
