@@ -1,10 +1,6 @@
-import { ElastosClient } from "@elastos/elastos-js-sdk"
-import Elastos from "./elastos.service"
 
 const GetDids = {
-  GenerateMnemonics: async () =>{
-    return await ElastosClient.did.generateNew()
-  },
+ 
   GetRequestToken: async () =>{
     let url = `${process.env.REACT_APP_DIDCRED_URL}/v1/auth/twitter_request`
     let response = await fetch(url, {
@@ -44,32 +40,15 @@ const GetDids = {
 
     return null;
   },
-  PublishDocument: async (mnemonic, profile) => {
-    let didelement = await ElastosClient.did.loadFromMnemonic(mnemonic.join(' '))
-    let isValid = false;
-
-
-    //Temporary bypass signature error
-    let signedDocument = null;
-    let tx = null
-    while(!isValid){
-        signedDocument = await Elastos.generateDocument(didelement, profile);
-        isValid = ElastosClient.didDocuments.isValid(signedDocument, didelement)
-    }
-
-    //Temporary bypass signature error
-    isValid = false;
-    while(!isValid){
-      tx = ElastosClient.idChainRequest.generateCreateRequest(signedDocument, didelement)
-      isValid = ElastosClient.idChainRequest.isValid(tx, didelement)
-    }
+  PublishDocument: async (tx, did) => {
+    
     
 
-    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/didtx/create`
+    let url = `${process.env.REACT_APP_ASSIST_URL}/v2/didtx/create`
     let data = {
       "didRequest" : tx,
       "requestFrom": "GetDIDs.com",
-      "did": `did:elastos:${didelement.did}`,
+      "did": `did:elastos:${did}`,
       "memo": ""
     }
 
@@ -91,7 +70,7 @@ const GetDids = {
     
   },
   getTxStatus: async (confirmation_id) =>{
-    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/didtx/confirmation_id/${confirmation_id}`
+    let url = `${process.env.REACT_APP_ASSIST_URL}/v2/didtx/confirmation_id/${confirmation_id}`
 
     let response = await fetch(url, {
          method: 'GET',

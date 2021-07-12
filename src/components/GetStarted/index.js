@@ -11,10 +11,10 @@ function GetStarted({ setStep }) {
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
         <div className="d-flex flex-column justify-content-between align-items-center getstarted-content">
           <span className="description">
-            {/* Our lives are linked to the apps, devices, and services we use every
+            Our lives are linked to the apps, devices, and services we use every
             day. But with each new digital connection, we expose our identity
-            and data to new risks beyond our control. */}
-            Currently Migrating to new DID sidechain
+            and data to new risks beyond our control. Currently Migrating to new
+            DID sidechain
           </span>
           <img
             src={getstart}
@@ -22,15 +22,14 @@ function GetStarted({ setStep }) {
             className="d-flex align-self-center mt-3"
           />
           <span className="description ">
-            {/* Let's set you up with a secure Digital Identity that we call a
+            Let's set you up with a secure Digital Identity that we call a
             Decentralized Identifier, or DID. <br />A DID provides independent
             proof of ownership of all your data, allowing you - and only you -
-            to truly own it. */}
+            to truly own it.
           </span>
         </div>
 
-        {/* <NextButton title="Let's get started" onClick={setStep} /> */}
-        <NextButton title="Not Available" />
+        <NextButton title="Let's get started" onClick={setStep} />
       </div>
     </ModalContainer>
   );

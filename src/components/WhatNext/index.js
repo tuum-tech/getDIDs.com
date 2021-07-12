@@ -23,15 +23,17 @@ function WhatNext() {
   const setTimer = ()=>{
     const timer = setTimeout(async () => {
       await refreshStatus()
-    }, 30 * 1000);
+    }, 2 * 1000);
     return () => clearTimeout(timer);
   }
 
   const refreshStatus = async () => {
     console.log("checking status")
     let confirmation = await GetDids.getTxStatus(publishStatus.confirmation_id)
-    setPublishStatus(confirmation)
-    console.log("checking status completed", confirmation.status)
+    if (confirmation) {
+      setPublishStatus(confirmation)
+      console.log("checking status completed", confirmation.status)
+    }
   }
 
   const openAndroid = () => {
@@ -55,6 +57,10 @@ function WhatNext() {
       case "completed":
         textItem = "Identity transaction is complete"
         break;
+
+      case "rejected":
+          textItem = "Identity transaction was rejected"
+          break;
 
       case "processing":
         textItem = "Identity transaction is processing…"
@@ -89,7 +95,7 @@ function WhatNext() {
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
         <div className="d-flex flex-column justify-content-between align-items-center content">
           <span className="description">
-            Congratz! Your identity is being published in the background. This process may take up to 10 minutes. You can check for status of this on the <a href={`https://idchain.elastos.org/address/${did}`} target="_blank" rel="noopener noreferrer">Blockchain Explorer</a> when is completed.
+            Congratz! Your identity is being published in the background. This process may take less than 1 minute. You can check for status of this on the <a href={`https://idchain.elastos.org/address/${did}`} target="_blank" rel="noopener noreferrer">Blockchain Explorer</a> when is completed.
           </span>
 
           <div className="qrcode-did">
@@ -100,12 +106,12 @@ function WhatNext() {
             />
             <div className="did-item">
               <CopyToClipboard
-                text={`did:elastos:${did}`}
+                text={`${did}`}
                 onCopy={notify}
               >
                 <img src={copyicon} alt="copy DID" className="copy-icon" />
               </CopyToClipboard>
-              <div className="did-text">{`did:elastos:${did}`}</div>
+              <div className="did-text">{`${did}`}</div>
 
             </div>
 
