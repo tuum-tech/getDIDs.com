@@ -1,8 +1,7 @@
 {
-  "name": "getdids",
-  "version": "1.0.0",
+  "name": "getdids.com",
+  "version": "2.0.0",
   "private": true,
-  "homepage": "./",
   "dependencies": {
     "@elastosfoundation/did-js-sdk": "^2.0.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -48,5 +47,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "author": "Tuum Tech",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/tuum-tech/getdids.com/issues"
+  },
+  "homepage": "https://github.com/tuum-tech/getdids.com#readme",
+  "engines": {
+    "node": "^12"
   }
 }
