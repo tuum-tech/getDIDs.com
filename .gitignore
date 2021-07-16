@@ -106,12 +106,5 @@ dist
 
 # Custom
 .idea/
-.didstore
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
-
-# AWS
-.ebextensions_prod
+.didstore/
+build/
