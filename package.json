@@ -1,7 +1,7 @@
 {
   "name": "getdids.com",
   "version": "2.0.0",
-  "private": true,
+  "homepage": "https://tuum-tech.github.io/getdids.com",
   "dependencies": {
     "@elastosfoundation/did-js-sdk": "^2.0.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -28,6 +28,8 @@
     "react-toastify": "^6.0.8"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start -h 0.0.0.0",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -53,7 +55,6 @@
   "bugs": {
     "url": "https://github.com/tuum-tech/getdids.com/issues"
   },
-  "homepage": "https://github.com/tuum-tech/getdids.com#readme",
   "engines": {
     "node": "^12"
   }
