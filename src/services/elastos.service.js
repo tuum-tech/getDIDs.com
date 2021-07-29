@@ -26,7 +26,7 @@ let adapter = {
     let did = request.proof.verificationMethod;
     did = did.substring(0, did.indexOf("#"));
 
-    let url = `${process.env.REACT_APP_ASSIST_URL}/v2/didtx/create`;
+    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/create/didTx`;
     let data = {
       didRequest: request,
       requestFrom: "GetDIDs.com",
@@ -44,7 +44,7 @@ let adapter = {
     });
 
     let json = await postResponse.json();
-    response[did.replace("did:elastos:", "")] = json.data.confirmation_id;
+    response[did.replace("did:elastos:", "")] = json.confirmation_id;
 
     console.log(response);
   },
