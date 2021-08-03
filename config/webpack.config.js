@@ -194,10 +194,11 @@ module.exports = function(webpackEnv) {
       globalObject: 'this',
     },
     optimization: {
-      minimize: isEnvProduction,
+      minimize: true,
       minimizer: [
         // This is only used in production mode
         new TerserPlugin({
+          exclude: /did_sdk.*/,
           terserOptions: {
             parse: {
               // We want terser to parse ecma 8 code. However, we don't want it
@@ -262,7 +263,14 @@ module.exports = function(webpackEnv) {
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
       splitChunks: {
         chunks: 'all',
-        name: false,
+        maxInitialRequests: Infinity,
+        minSize: 0,
+        cacheGroups: {
+          did_sdk: {
+            test: /[\\/]node_modules[\\/](@elastosfoundation)[\\/]/,
+            name: "did_sdk"
+          }
+        }
       },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
