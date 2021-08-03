@@ -95,7 +95,7 @@ function WhatNext() {
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
         <div className="d-flex flex-column justify-content-between align-items-center content">
           <span className="description">
-            Congratz! Your identity is being published in the background. This process may take less than 1 minute. You can check for status of this on the <a href={`https://idchain.elastos.org/address/${did}`} target="_blank" rel="noopener noreferrer">Blockchain Explorer</a> when is completed.
+            Congratz! Your identity is being published in the background. This process may take around 10 seconds or so. This page will update automatically anytime there is a change in status of your transaction.
           </span>
 
           <div className="qrcode-did">
