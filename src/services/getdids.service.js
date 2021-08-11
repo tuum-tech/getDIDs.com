@@ -44,8 +44,6 @@ const GetDids = {
     let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/create/didTx`;
     let data = {
       didRequest: tx,
-      requestFrom: "GetDIDs.com",
-      did: `did:elastos:${did}`,
       memo: "",
     };
 
@@ -61,12 +59,12 @@ const GetDids = {
     let json = await response.json();
     console.log("PublishDocument: ", json);
     return {
-      confirmation_id: json.confirmation_id,
+      confirmation_id: json.data.didTx.confirmationId,
       status: json.didTx.status,
     };
   },
   getTxStatus: async (confirmation_id) => {
-    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/get/didTx/confirmation_id/${confirmation_id}`;
+    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/get/didTx/confirmationId/${confirmation_id}`;
 
     let response = await fetch(url, {
       method: "GET",
@@ -80,7 +78,7 @@ const GetDids = {
     console.log("getTxStatus: ", json);
     return {
       confirmation_id: confirmation_id,
-      status: json.didTx.status,
+      status: json.data.didTx.status,
     };
   },
 };

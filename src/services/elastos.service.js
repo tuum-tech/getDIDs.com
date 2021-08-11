@@ -29,8 +29,6 @@ let adapter = {
     let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/create/didTx`;
     let data = {
       didRequest: request,
-      requestFrom: "GetDIDs.com",
-      did: did,
       memo: "",
     };
 
@@ -44,7 +42,7 @@ let adapter = {
     });
 
     let json = await postResponse.json();
-    response[did.replace("did:elastos:", "")] = json.confirmation_id;
+    response[did.replace("did:elastos:", "")] = json.data.didTx.confirmationId;
 
     console.log(response);
   },
