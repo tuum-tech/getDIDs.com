@@ -1,81 +1,85 @@
-import React, { useContext, useEffect  } from "react";
+import React, { useContext, useEffect } from "react";
 import ModalContainer from "common/ModalContainer";
-import elastoslogo from 'assets/elastos.svg'
-import androidlogo from 'assets/android.jpg'
-import ioslogo from 'assets/ios.jpg'
-import copyicon from 'assets/copy.svg'
+import elastoslogo from "assets/elastos.svg";
+import androidlogo from "assets/android.jpg";
+import ioslogo from "assets/ios.jpg";
+import copyicon from "assets/copy.svg";
 import MnemonicContext from "context/MnemonicContext";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast, Slide } from "react-toastify";
-import GetDids from "services/getdids.service"
+import GetDids from "services/getdids.service";
 import "./index.scss";
 
 var QRCode = require("qrcode.react");
 
 function WhatNext() {
-  const { did, mnemonic, publishStatus, setPublishStatus } = useContext(MnemonicContext)
+  const { did, mnemonic, publishStatus, setPublishStatus } =
+    useContext(MnemonicContext);
 
   useEffect(() => {
-    if (publishStatus.status === "Completed") return
-    setTimer()
-  })
+    if (publishStatus.status === "Completed") return;
+    setTimer();
+  });
 
-  const setTimer = ()=>{
+  const setTimer = () => {
     const timer = setTimeout(async () => {
-      await refreshStatus()
+      await refreshStatus();
     }, 2 * 1000);
     return () => clearTimeout(timer);
-  }
+  };
 
   const refreshStatus = async () => {
-    console.log("checking status")
-    let confirmation = await GetDids.getTxStatus(publishStatus.confirmation_id)
+    console.log("checking status");
+    let confirmation = await GetDids.getTxStatus(publishStatus.confirmation_id);
     if (confirmation) {
-      setPublishStatus(confirmation)
-      console.log("checking status completed", confirmation.status)
+      setPublishStatus(confirmation);
+      console.log("checking status completed", confirmation.status);
     }
-  }
+  };
 
   const openAndroid = () => {
-    window.open("https://play.google.com/store/apps/details?id=org.elastos.trinity.runtime")
-  }
+    window.open(
+      "https://play.google.com/store/apps/details?id=org.elastos.essentials.app"
+    );
+  };
   const openIOS = () => {
-    window.open("https://apps.apple.com/us/app/elastos-essentials/id1532705468 ")
-  }
+    window.open(
+      "https://apps.apple.com/us/app/elastos-essentials/id1568931743"
+    );
+  };
 
   const Confirmation = () => {
-
-
     let status = publishStatus.status.toLowerCase();
     let classItem = `confirmation-${status}`;
     let textItem = "";
     switch (status) {
-      case "quarentined":
-        textItem = "Identity transaction is on quarentine"
+      case "cancelled":
+        textItem = "Identity transaction is on cancelled";
         break;
 
       case "completed":
-        textItem = "Identity transaction is complete"
+        textItem = "Identity transaction is complete";
         break;
 
       case "rejected":
-          textItem = "Identity transaction was rejected"
-          break;
+        textItem = "Identity transaction was rejected";
+        break;
 
       case "processing":
-        textItem = "Identity transaction is processing…"
+        textItem = "Identity transaction is processing…";
         break;
 
       default:
-        textItem = "Please wait. Identity transaction is pending"
+        textItem = "Please wait. Identity transaction is pending";
         break;
     }
 
-
-    return <div className={classItem}>
-      <span className="confirmation-status">{textItem}</span>
-    </div>
-  }
+    return (
+      <div className={classItem}>
+        <span className="confirmation-status">{textItem}</span>
+      </div>
+    );
+  };
 
   const notify = () =>
     toast.info("☑ DID successfully copied to clipboard", {
@@ -95,7 +99,10 @@ function WhatNext() {
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
         <div className="d-flex flex-column justify-content-between align-items-center content">
           <span className="description">
-            Congratz! Your identity is being published in the background. This process may take less than 1 minute. You can check for status of this on the <a href={`https://idchain.elastos.org/address/${did}`} target="_blank" rel="noopener noreferrer">Blockchain Explorer</a> when is completed.
+            Congratz! Your identity is being published in the background. This
+            process may take around 10 seconds or so. This page will update
+            automatically anytime there is a change in status of your
+            transaction.
           </span>
 
           <div className="qrcode-did">
@@ -105,39 +112,38 @@ function WhatNext() {
               value={mnemonic.join(" ")}
             />
             <div className="did-item">
-              <CopyToClipboard
-                text={`${did}`}
-                onCopy={notify}
-              >
+              <CopyToClipboard text={`${did}`} onCopy={notify}>
                 <img src={copyicon} alt="copy DID" className="copy-icon" />
               </CopyToClipboard>
               <div className="did-text">{`${did}`}</div>
-
             </div>
-
           </div>
 
-
           {Confirmation()}
-
-
         </div>
-
-
       </div>
       <div className="d-flex flex-column align-items-center elastos-content">
         <img src={elastoslogo} alt="elastOS" height="40px" width="40px" />
         <span className="elastos-download">Download elastOS</span>
-        <span className="last-message">Continue managing your new digital identity on the elastOS application.</span>
+        <span className="last-message">
+          Continue managing your new digital identity on the elastOS
+          application.
+        </span>
         <div className="store-download">
-          <img src={ioslogo} alt="IOS App Store" height="40px" onClick={openIOS} />
-          <img src={androidlogo} alt="Google Play" height="40px" onClick={openAndroid} />
+          <img
+            src={ioslogo}
+            alt="IOS App Store"
+            height="40px"
+            onClick={openIOS}
+          />
+          <img
+            src={androidlogo}
+            alt="Google Play"
+            height="40px"
+            onClick={openAndroid}
+          />
         </div>
-
       </div>
-
-
-
     </ModalContainer>
   );
 }

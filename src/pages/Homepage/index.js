@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GetStarted from "components/GetStarted";
 import Create from "components/Create";
 import VerifyMnemonics from "components/VerifyMnemonics";
-import Import from "components/Import";
+//import Import from "components/Import";
 import Publish from "components/Publish";
 import WhatNext from "components/WhatNext";
 import Header from "common/Header";
@@ -13,16 +13,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import "./index.scss";
-import ConfirmData from "components/ConfirmData";
 import getDids from "services/getdids.service";
 function renderComponent(step, setStep) {
   switch (step) {
     case 0:
       return <GetStarted setStep={() => setStep(1)} />;
-    case 1:
+    /* case 1:
       return (
         <Import setStep={() => setStep(2)} setMnemonic={() => setStep(3)} />
-      );
+      ); 
     case 2:
       return (
         <ConfirmData setStep={() => setStep(3)} setBack={() => setStep(1)} />
@@ -39,6 +38,21 @@ function renderComponent(step, setStep) {
     case 5:
       return <Publish setStep={() => setStep(6)} />;
     case 6:
+      return <WhatNext setStep={setStep} />;
+    default:
+      return <GetStarted setStep={() => setStep(1)} />;*/
+    case 1:
+      return <Create setStep={() => setStep(2)} />;
+    case 2:
+      return (
+        <VerifyMnemonics
+          setStep={() => setStep(3)}
+          setBack={() => setStep(1)}
+        />
+      );
+    case 3:
+      return <Publish setStep={() => setStep(4)} />;
+    case 4:
       return <WhatNext setStep={setStep} />;
     default:
       return <GetStarted setStep={() => setStep(1)} />;
