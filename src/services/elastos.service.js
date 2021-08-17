@@ -24,15 +24,15 @@ let adapter = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: process.env.REACT_APP_ASSIST_KEY,
+        Authorization: `Bearer ${process.env.REACT_APP_ASSIST_AUTH_TOKEN}`,
       },
       body: JSON.stringify(data),
     });
 
     let json = await postResponse.json();
-    response[did.replace("did:elastos:", "")] = json.data.didTx.confirmationId;
+    console.log(json);
 
-    console.log(response);
+    response[did.replace("did:elastos:", "")] = json.data.didTx.confirmationId;
   },
 };
 

@@ -51,7 +51,7 @@ const GetDids = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: process.env.REACT_APP_ASSIST_KEY,
+        Authorization: `Bearer ${process.env.REACT_APP_ASSIST_AUTH_TOKEN}`,
       },
       body: JSON.stringify(data),
     });
@@ -70,7 +70,7 @@ const GetDids = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: process.env.REACT_APP_ASSIST_KEY,
+        Authorization: `Bearer ${process.env.REACT_APP_ASSIST_AUTH_TOKEN}`,
       },
     });
 
