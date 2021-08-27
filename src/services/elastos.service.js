@@ -14,10 +14,13 @@ let adapter = {
     let did = request.proof.verificationMethod;
     did = did.substring(0, did.indexOf("#"));
 
+    const _network = network === "testnet" ? "testnet" : "mainnet";
+    console.log("here: ", _network);
     let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/create/didTx`;
     let data = {
+      network: _network,
       didRequest: request,
-      memo: "",
+      memo: "Published from GetDIDs.com",
     };
 
     let postResponse = await fetch(url, {
@@ -43,8 +46,8 @@ const Elastos = {
   GenerateMnemonics: async () => {
     return new Mnemonic().generate();
   },
-  GetIdentity: async (mnemonic) => {
-    DIDBackend.initialize(new DefaultDIDAdapter("mainnet"));
+  GetIdentity: async (network, mnemonic) => {
+    DIDBackend.initialize(new DefaultDIDAdapter(network));
 
     let store = await DIDStore.open(process.env.REACT_APP_DID_STORE_PATH);
     return RootIdentity.createFromMnemonic(
@@ -55,13 +58,15 @@ const Elastos = {
       true
     );
   },
-  GetDIDDocument: async (mnemonic) => {
-    let identity = await Elastos.GetIdentity(mnemonic);
+  GetDIDDocument: async (network, mnemonic) => {
+    const _network = network === "testnet" ? "testnet" : "mainnet";
+    let identity = await Elastos.GetIdentity(_network, mnemonic);
     return await identity.newDid(Elastos.storepass, 0, true);
   },
-  PublishDocument: async (mnemonic, profile) => {
+  PublishDocument: async (network, mnemonic, profile) => {
     response = {};
-    let document = await Elastos.GetDIDDocument(mnemonic);
+    const _network = network === "testnet" ? "testnet" : "mainnet";
+    let document = await Elastos.GetDIDDocument(_network, mnemonic);
     let docBuilder = DIDDocumentBuilder.newFromDocument(document);
     let did = profile.did.replace("did:elastos:", "");
     docBuilder.edit();

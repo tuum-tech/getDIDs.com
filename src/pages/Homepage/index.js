@@ -64,6 +64,7 @@ function Homepage() {
   const search = useLocation().search;
   const oauth_token = new URLSearchParams(search).get("oauth_token");
   const oauth_verifier = new URLSearchParams(search).get("oauth_verifier");
+  const [network, setNetwork] = useState("");
   const [twitter_user, setTwitterUser] = useState("");
   const [twitter_name, setTwitterName] = useState("");
   const [publishStatus, setPublishStatus] = useState({
@@ -121,6 +122,8 @@ function Homepage() {
   return (
     <MnemonicContext.Provider
       value={{
+        network,
+        setNetwork,
         mnemonic,
         setMnemonic: (generatedMnemonic) => setMnemonic(generatedMnemonic),
         did,

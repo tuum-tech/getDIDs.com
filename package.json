@@ -64,6 +64,7 @@
     "react-lottie": "^1.2.3",
     "react-modern-datepicker": "^1.1.0",
     "react-router-dom": "^5.2.0",
+    "react-select": "^4.3.1",
     "react-toastify": "^6.0.8",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.1",
@@ -163,5 +164,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@types/react-select": "^4.0.17"
   }
 }

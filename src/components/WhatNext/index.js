@@ -13,7 +13,7 @@ import "./index.scss";
 var QRCode = require("qrcode.react");
 
 function WhatNext() {
-  const { did, mnemonic, publishStatus, setPublishStatus } =
+  const { network, did, mnemonic, publishStatus, setPublishStatus } =
     useContext(MnemonicContext);
 
   useEffect(() => {
@@ -30,7 +30,10 @@ function WhatNext() {
 
   const refreshStatus = async () => {
     console.log("checking status");
-    let confirmation = await GetDids.getTxStatus(publishStatus.confirmation_id);
+    let confirmation = await GetDids.getTxStatus(
+      network,
+      publishStatus.confirmation_id
+    );
     if (confirmation) {
       setPublishStatus(confirmation);
       console.log("checking status completed", confirmation.status);

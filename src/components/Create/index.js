@@ -16,7 +16,9 @@ function MnemonicItem({ number, title }) {
 }
 
 function Create({ setStep }) {
-  const { mnemonic, setMnemonic, setDid } = useContext(MnemonicContext);
+  const { network, mnemonic, setMnemonic, setDid } =
+    useContext(MnemonicContext);
+
   useEffect(() => {
     async function generateDid() {
       /*eslint-disable no-undef*/
@@ -30,7 +32,7 @@ function Create({ setStep }) {
         mnemonicsArr = mnemonics.split(" ");
       }
       setMnemonic(mnemonicsArr);
-      let diddocument = await Elastos.GetDIDDocument(mnemonics);
+      let diddocument = await Elastos.GetDIDDocument(network, mnemonics);
       setDid(diddocument.getDefaultPublicKeyId().getDid().toString());
       /*eslint-disable no-undef*/
     }
@@ -67,6 +69,7 @@ function Create({ setStep }) {
             If you lose these mnemonics, you lose access to your DID.
           </span>
         </div>
+
         <NextButton title="Next" onClick={setStep} />
       </div>
     </ModalContainer>

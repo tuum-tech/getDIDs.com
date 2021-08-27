@@ -40,31 +40,9 @@ const GetDids = {
 
     return null;
   },
-  PublishDocument: async (tx, did) => {
-    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/create/didTx`;
-    let data = {
-      didRequest: tx,
-      memo: "",
-    };
-
-    let response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_ASSIST_AUTH_TOKEN}`,
-      },
-      body: JSON.stringify(data),
-    });
-
-    let json = await response.json();
-    console.log("PublishDocument: ", json);
-    return {
-      confirmation_id: json.data.didTx.confirmationId,
-      status: json.didTx.status,
-    };
-  },
-  getTxStatus: async (confirmation_id) => {
-    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/get/didTx/confirmationId/${confirmation_id}`;
+  getTxStatus: async (network, confirmation_id) => {
+    const _network = network === "testnet" ? "testnet" : "mainnet";
+    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/get/didTx/confirmationId/${confirmation_id}?network=${_network}`;
 
     let response = await fetch(url, {
       method: "GET",
