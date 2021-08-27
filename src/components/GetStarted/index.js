@@ -16,7 +16,6 @@ function GetStarted({ setStep }) {
   const { setNetwork } = useContext(MnemonicContext);
 
   const handleChange = (options) => {
-    console.log("options: ", options.value);
     setNetwork(options.value);
   };
 

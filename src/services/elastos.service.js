@@ -10,32 +10,11 @@ import {
 
 let adapter = {
   createIdTransaction: async (payload, memo) => {
-    let request = JSON.parse(payload);
-    let did = request.proof.verificationMethod;
-    did = did.substring(0, did.indexOf("#"));
+    let didRequest = JSON.parse(payload);
+    let did = didRequest.proof.verificationMethod;
+    did = did.substring(0, did.indexOf("#")).replace("did:elastos:", "");
 
-    const _network = network === "testnet" ? "testnet" : "mainnet";
-    console.log("here: ", _network);
-    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/create/didTx`;
-    let data = {
-      network: _network,
-      didRequest: request,
-      memo: "Published from GetDIDs.com",
-    };
-
-    let postResponse = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_ASSIST_AUTH_TOKEN}`,
-      },
-      body: JSON.stringify(data),
-    });
-
-    let json = await postResponse.json();
-    console.log(json);
-
-    response[did.replace("did:elastos:", "")] = json.data.didTx.confirmationId;
+    response[did] = didRequest;
   },
 };
 
@@ -123,8 +102,27 @@ const Elastos = {
       adapter
     );
 
+    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/create/didTx`;
+    let data = {
+      network: _network,
+      didRequest: response[did],
+      memo: "Published from GetDIDs.com",
+    };
+
+    let postResponse = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_ASSIST_AUTH_TOKEN}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    let json = await postResponse.json();
+    console.log("response: ", json);
+
     return {
-      confirmation_id: response[did],
+      confirmation_id: json.data.didTx.confirmationId,
       status: "Pending",
     };
   },

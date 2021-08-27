@@ -19,7 +19,7 @@ function MnemonicWord({ title, click, hide }) {
 }
 
 function shuffle(array) {
-  /* var currentIndex = array.length,
+  var currentIndex = array.length,
     temporaryValue,
     randomIndex;
 
@@ -30,7 +30,7 @@ function shuffle(array) {
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
-  } */
+  }
 
   return array;
 }
