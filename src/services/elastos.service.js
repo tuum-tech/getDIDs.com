@@ -2,7 +2,6 @@ import {
   DIDStore,
   Mnemonic,
   RootIdentity,
-  VerifiableCredential,
   DIDDocumentBuilder,
   DIDBackend,
   DefaultDIDAdapter,
@@ -73,27 +72,6 @@ const Elastos = {
       );
     }
 
-    if (profile.birthDate) {
-      docBuilder = await docBuilder.createAndAddCredential(
-        Elastos.storepass,
-        "#birthdate",
-        { birthdate: profile.birthDate },
-        ["SelfProclaimedCredential", "BasicProfileCredential"]
-      );
-    }
-
-    if (profile.twitter) {
-      let twitterVc = await Elastos.GenerateTwitterVerifiedCredential(
-        did,
-        profile.twitter
-      );
-
-      if (twitterVc) {
-        let vc = await VerifiableCredential.parseContent(twitterVc);
-        docBuilder = docBuilder.addCredential(vc);
-      }
-    }
-
     let doc = await docBuilder.seal(Elastos.storepass);
     await doc.publish(
       Elastos.storepass,
@@ -102,11 +80,12 @@ const Elastos = {
       adapter
     );
 
-    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/create/didTx`;
+    let url = `${process.env.REACT_APP_ASSIST_URL}/v1/eidSidechain/publish/didTx`;
     let data = {
       network: _network,
       didRequest: response[did],
       memo: "Published from GetDIDs.com",
+      upgradeAccount: true,
     };
 
     let postResponse = await fetch(url, {
@@ -125,29 +104,6 @@ const Elastos = {
       confirmation_id: json.data.didTx.confirmationId,
       status: "Pending",
     };
-  },
-  GenerateTwitterVerifiedCredential: async (did, twitter) => {
-    let url = `${process.env.REACT_APP_DIDCRED_URL}/v1/validation/internet_account`;
-    let response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: process.env.REACT_APP_DIDCRED_KEY,
-      },
-      body: JSON.stringify({
-        did: did,
-        credential_type: "twitter",
-        credential_value: twitter,
-      }),
-    });
-
-    if (response.ok) {
-      let json = await response.json();
-      let vc = json.data.verifiable_credential;
-      return vc;
-    } else {
-      return null;
-    }
   },
 };
 

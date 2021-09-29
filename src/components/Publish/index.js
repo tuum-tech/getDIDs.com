@@ -6,23 +6,13 @@ import MnemonicContext from "context/MnemonicContext";
 import ConfirmationDetail from "common/ConfirmationDetail";
 import usericon from "assets/users.svg";
 import emailicon from "assets/email.svg";
-import birthicon from "assets/birthicon.svg";
-import twittericon from "assets/twittericon.svg";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 import Elastos from "services/elastos.service";
 
 function Publish({ setStep }) {
-  const {
-    network,
-    name,
-    email,
-    birthDate,
-    twitter_user,
-    setPublishStatus,
-    mnemonic,
-    did,
-  } = useContext(MnemonicContext);
+  const { network, name, email, setPublishStatus, mnemonic, did } =
+    useContext(MnemonicContext);
 
   const publishDocument = async () => {
     let confirmation = await Elastos.PublishDocument(
@@ -32,8 +22,6 @@ function Publish({ setStep }) {
         did: did,
         name: name,
         email: email,
-        birthDate: birthDate,
-        twitter: twitter_user,
       }
     );
     setPublishStatus(confirmation);
@@ -50,13 +38,8 @@ function Publish({ setStep }) {
       </span>
       <div className="d-flex flex-column justify-content-between align-items-center h-100">
         <div className="confirmation-items">
-          <ConfirmationDetail
-            icon={twittericon}
-            value={twitter_user ? "@" + twitter_user : ""}
-          />
           <ConfirmationDetail icon={usericon} value={name} />
           <ConfirmationDetail icon={emailicon} value={email} />
-          <ConfirmationDetail icon={birthicon} value={birthDate} />
         </div>
         <NextButton title="Finish" onClick={publishDocument} />
       </div>
