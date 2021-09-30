@@ -85,7 +85,6 @@ const Elastos = {
       network: _network,
       didRequest: response[did],
       memo: "Published from GetDIDs.com",
-      upgradeAccount: true,
     };
 
     let postResponse = await fetch(url, {
