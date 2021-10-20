@@ -64,10 +64,6 @@ function WhatNext() {
         textItem = "Identity transaction is complete";
         break;
 
-      case "rejected":
-        textItem = "Identity transaction was rejected";
-        break;
-
       case "processing":
         textItem = "Identity transaction is processing…";
         break;
@@ -103,9 +99,15 @@ function WhatNext() {
         <div className="d-flex flex-column justify-content-between align-items-center content">
           <span className="description">
             Congratz! Your identity is being published in the background. This
-            process may take around 10 seconds or so. This page will update
-            automatically anytime there is a change in status of your
-            transaction.
+            process may take around 10 seconds or so. You can check out your DID
+            on the{" "}
+            <a
+              href={`https://eid.elastos.io/did?did=${encodeURIComponent(did)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Elastos ID Sidechain browser
+            </a>
           </span>
 
           <div className="qrcode-did">

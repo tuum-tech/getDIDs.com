@@ -2,8 +2,8 @@ import {
   DIDStore,
   Mnemonic,
   RootIdentity,
-  DIDDocumentBuilder,
   DIDBackend,
+  DIDDocument,
   DefaultDIDAdapter,
 } from "@elastosfoundation/did-js-sdk";
 
@@ -45,7 +45,7 @@ const Elastos = {
     response = {};
     const _network = network === "testnet" ? "testnet" : "mainnet";
     let document = await Elastos.GetDIDDocument(_network, mnemonic);
-    let docBuilder = DIDDocumentBuilder.newFromDocument(document);
+    let docBuilder = DIDDocument.Builder.newFromDocument(document);
     let did = profile.did.replace("did:elastos:", "");
     docBuilder.edit();
     docBuilder.setDefaultExpires();
