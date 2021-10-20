@@ -24,12 +24,12 @@ function WhatNext() {
   const setTimer = () => {
     const timer = setTimeout(async () => {
       await refreshStatus();
-    }, 2 * 1000);
+    }, 10 * 1000);
     return () => clearTimeout(timer);
   };
 
   const refreshStatus = async () => {
-    console.log("checking status");
+    console.log("checking status: ", publishStatus.confirmation_id);
     let confirmation = await GetDids.getTxStatus(
       network,
       publishStatus.confirmation_id

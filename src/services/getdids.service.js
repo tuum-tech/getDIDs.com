@@ -10,9 +10,8 @@ const GetDids = {
         Authorization: `Bearer ${process.env.REACT_APP_ASSIST_AUTH_TOKEN}`,
       },
     });
-
+    console.log("response: ", response);
     let json = await response.json();
-    console.log("getTxStatus: ", json);
     return {
       confirmation_id: confirmation_id,
       status: json.data.didTx.status,
